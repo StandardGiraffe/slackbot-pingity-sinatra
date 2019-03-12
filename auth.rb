@@ -11,9 +11,6 @@ SLACK_CONFIG = {
   slack_verification_token: ENV['SLACK_VERIFICATION_TOKEN']
 }
 
-puts SLACK_CONFIG.inspect
-
-
 # Check to see if the required variables listed above were provided, and raise an exception if any are missing.
 missing_params = SLACK_CONFIG.select { |key, value| value.nil? }
 if missing_params.any?
@@ -68,9 +65,6 @@ class Auth < Sinatra::Base
   get '/finish_auth' do
     client = Slack::Web::Client.new
     # OAuth Step 3: Success or failure
-      puts "*************************"
-      p params
-      puts "*************************"
     begin
       response = client.oauth_access(
         {
@@ -90,10 +84,6 @@ class Auth < Sinatra::Base
         bot_user_id: response['bot']['bot_user_id'],
         bot_access_token: response['bot']['bot_access_token']
       }
-
-      puts "*************************"
-      p $teams
-      puts "*************************"
 
       $teams[team_id]['client'] = create_slack_client(response['bot']['bot_access_token'])
       # Be sure to let the user know that auth succeeded.
