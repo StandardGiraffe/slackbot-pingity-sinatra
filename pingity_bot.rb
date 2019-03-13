@@ -9,7 +9,58 @@ class PingityBot
     initial_check = send_message(
       team_id: team_id,
       channel: channel,
-      text: "I'm attempting to ping \"#{uri}\".\nJust a moment, please..."
+      text: "I'm attempting to ping \"#{uri}\".\nJust a moment, please...",
+      blocks: [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "*<https://pingity.com|Pingty> is trying to test \"#{uri}*\""
+          }
+        }
+      ],
+      attachments: [
+        {
+          "color": "#6495ed",
+          "blocks": [
+            {
+              "type": "section",
+              "text": {
+                "type": "mrkdwn",
+                "text": "*Overall Status:*\nPENDING*\n*Current as of:*\n..."
+              },
+              "accessory": {
+                "type": "image",
+                "image_url": "https://www.tutorialspoint.com/ruby/images/ruby-mini-logo.jpg",
+                "alt_text": "#{uri} is being tested..."
+              }
+            },
+            {
+              "type": "actions",
+              "elements": [
+                {
+                  "type": "button",
+                  "text": {
+                    "type": "plain_text",
+                    "emoji": true,
+                    "text": "Or, try it on Pingity.com"
+                  },
+                  "url": "https://pingity.com/"
+                },
+                {
+                  "type": "button",
+                  "text": {
+                    "type": "plain_text",
+                    "emoji": true,
+                    "text": "Refresh Result"
+                  },
+                  "value": "retest"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     )
 
     report = Pingity::Report.new(
@@ -62,7 +113,7 @@ class PingityBot
                     "emoji": true,
                     "text": "Details on Pingity.com"
                   },
-                  "value": "details_on_pingity"
+                  "url": "https://pingity.com/?target=#{target}"
                 },
                 {
                   "type": "button",

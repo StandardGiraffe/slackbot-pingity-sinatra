@@ -4,15 +4,15 @@ require 'sinatra/base'
 require 'slack-ruby-client'
 
 require './pingity_bot'
+require './lib/verification-helpers'
 
 class API < Sinatra::Base
   post '/command' do
-    # Inform Slack that the slash command has been received
-    status 200
+    verify_token(params['token'])
 
-    unless SLACK_CONFIG[:slack_verification_token] == params['token']
-      halt 403, "Invalid Slack verification token received: #{params['token']}"
-    end
+    # # This should verify the request, but the request object can't be parsed.  Argh.
+    # slack_request = Slack::Events::Request.new(request)
+    # slack_request.verify!
 
     # Route the received command
     case params['command']
@@ -22,5 +22,15 @@ class API < Sinatra::Base
     else
       send_message(team_id: params['team_id'], channel: params['channel'], text: "Received an unknown command: #{params['command']}")
     end
+
+    status 200
+  end
+
+  post '/actions' do
+    verify_token(params['token'])
+
+    payload = params['payload']
+
+    status 200
   end
 end
