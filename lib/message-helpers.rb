@@ -84,3 +84,109 @@ def human_readable_status(status)
     "fail_critical" => "FAIL"
   }[status]
 end
+
+def pending_blocks(uri:)
+  [
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*<https://pingity.com|Pingty> is trying to test \"#{uri}\"...*"
+      }
+    }
+  ]
+end
+
+def pending_attachments(uri:)
+  [
+    {
+      "color": "#6495ed",
+      "blocks": [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "*Overall Status:*\nPENDING\n*Current as of:*\n..."
+          },
+          "accessory": {
+            "type": "image",
+            "image_url": "https://www.tutorialspoint.com/ruby/images/ruby-mini-logo.jpg",
+            "alt_text": "#{uri} is being tested..."
+          }
+        },
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "Or, try it on Pingity.com"
+              },
+              "url": ENV['PINGITY_API_BASE']
+            }
+          ]
+        }
+      ]
+    }
+  ]
+end
+
+def results_blocks(target:)
+  [
+    {
+      "type": "section",
+      "text": {
+        "type": "mrkdwn",
+        "text": "*<https://pingity.com|Pingty> results for #{target}: *"
+      }
+    }
+  ]
+end
+
+def results_attachments(target:, decorators:, timestamp:, status:)
+  [
+    {
+      "color": decorators[:color],
+      "blocks": [
+        {
+          "type": "section",
+          "text": {
+            "type": "mrkdwn",
+            "text": "*Overall Status:*\n#{status}\n*Current as of:*\n<!date^#{timestamp}^{date_short_pretty} at {time}|Timestamp unavailable, sorry.>"
+          },
+          "accessory": {
+            "type": "image",
+            "image_url": decorators[:url],
+            "alt_text": decorators[:alt_text]
+          }
+        },
+        {
+          "type": "actions",
+          "elements": [
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "Details on Pingity.com"
+              },
+              "url": "#{ENV['PINGITY_API_BASE']}?target=#{target}"
+            },
+            {
+              "type": "button",
+              "text": {
+                "type": "plain_text",
+                "emoji": true,
+                "text": "Refresh Result"
+              },
+              "value": target,
+              "action_id": "refresh_result"
+            }
+          ]
+        }
+      ]
+    },
+  ]
+end

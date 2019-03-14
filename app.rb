@@ -23,14 +23,25 @@ class API < Sinatra::Base
       send_message(team_id: params['team_id'], channel: params['channel'], text: "Received an unknown command: #{params['command']}")
     end
 
-    status 200
+    200
   end
 
   post '/actions' do
-    verify_token(params['token'])
+    payload = JSON.parse(params['payload'])
+    puts payload.to_json
 
-    payload = params['payload']
+    verify_token(payload['token'])
 
-    status 200
+    action = payload['actions'].first['action_id']
+
+    case
+    when 'refresh_result'
+      PingityBot.refresh_result(payload: payload)
+    else
+      puts "WARNING: WEIRD ACTION PAYLOAD RECEIVED.  REJECTED."
+      halt 404, "WARNING: WEIRD ACTION PAYLOAD RECEIVED.  REJECTED: #{action}"
+    end
+
+    200
   end
 end
