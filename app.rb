@@ -5,22 +5,25 @@ require 'slack-ruby-client'
 
 require './pingity_bot'
 require './lib/verification-helpers'
+require './lib/message-helpers'
 
 class API < Sinatra::Base
   post '/command' do
     verify_token(params['token'])
 
-    # # This should verify the request, but the request object can't be parsed.  Argh.
-    # slack_request = Slack::Events::Request.new(request)
-    # slack_request.verify!
-
     # Route the received command
     case params['command']
     when '/ping'
       uri = params['text'].split.first
-      PingityBot.ping(request_data: params, uri: uri)
+
+      unless uri
+        send_error(params: params, error: :ping_command_missing_argument)
+      else
+        PingityBot.ping(request_data: params, uri: uri)
+      end
+
     else
-      send_message(team_id: params['team_id'], channel: params['channel'], text: "Received an unknown command: #{params['command']}")
+      send_message(team_id: params['team_id'], channel: params['channel_id'], text: "Received an unknown command: #{params['command']}")
     end
 
     200

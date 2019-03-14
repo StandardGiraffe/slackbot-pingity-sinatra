@@ -1,5 +1,4 @@
 require 'pingity'
-require './lib/message-helpers'
 
 class PingityBot
   def self.ping(request_data:, uri:)

@@ -7,14 +7,16 @@
 # @param [String] text (optional) Simple message.  If a blocks argument is also provided, text will not be printed (but may be displayed on notifications), and should be non-critical.
 # @param [Array] blocks (optional) Array of one or more message blocks (hashes).  If included, the text param will not be shown on the Slack channel (but may be displayed on notifications).
 # @param [Array] attachments (optional) Array of one or more message attachments (hashes).
+# @param [String] user (optional) User ID.  If included, the specified message will be sent as an ephemeral message only to the specified user.
 #
 # @return [Hash] API response
 #
-def send_message(team_id:, channel:, ts: nil, text: nil, blocks: nil, attachments: nil)
+def send_message(team_id:, channel:, ts: nil, text: nil, blocks: nil, attachments: nil, user: nil)
   message = {
     as_user: 'true',
     channel: channel,
-    unfurl_media: false
+    unfurl_media: false,
+    mrkdwn: true
   }
 
   if text
@@ -32,6 +34,9 @@ def send_message(team_id:, channel:, ts: nil, text: nil, blocks: nil, attachment
   if ts
     message.merge!({ ts: ts })
     response = $teams[team_id]['client'].chat_update(message)
+  elsif user
+    message.merge!({ user: user })
+    response = $teams[team_id]['client'].chat_postEphemeral(message)
   else
     response = $teams[team_id]['client'].chat_postMessage(message)
   end
@@ -189,4 +194,27 @@ def results_attachments(target:, decorators:, timestamp:, status:)
       ]
     },
   ]
+end
+
+def send_error(params:, error:)
+  send_message(
+    team_id: params['team_id'],
+    channel: params['channel_id'],
+    user: params['user_id'],
+    text: "Error: #{error.to_s}",
+    blocks: error_blocks(error)
+  )
+end
+
+def error_blocks(error)
+  { ping_command_missing_argument: [
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": "*Argument Missing: * `/ping` requires a URI (eg. `/ping example.com`)"
+        }
+      }
+    ]
+  }[error]
 end
