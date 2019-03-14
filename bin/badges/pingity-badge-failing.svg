@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg
+   xmlns:dc="http://purl.org/dc/elements/1.1/"
+   xmlns:cc="http://creativecommons.org/ns#"
+   xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+   xmlns:svg="http://www.w3.org/2000/svg"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   width="77.370003mm"
+   height="77.370003mm"
+   viewBox="0 0 77.370003 77.370003"
+   version="1.1"
+   id="svg8"
+   inkscape:version="0.92.4 (unknown)"
+   sodipodi:docname="pingity-badge-failing.svg">
+  <defs
+     id="defs2" />
+  <sodipodi:namedview
+     id="base"
+     pagecolor="#ffffff"
+     bordercolor="#666666"
+     borderopacity="1.0"
+     inkscape:pageopacity="0.0"
+     inkscape:pageshadow="2"
+     inkscape:zoom="1.4"
+     inkscape:cx="160.47986"
+     inkscape:cy="112.01064"
+     inkscape:document-units="mm"
+     inkscape:current-layer="layer1"
+     showgrid="false"
+     inkscape:window-width="2560"
+     inkscape:window-height="1369"
+     inkscape:window-x="0"
+     inkscape:window-y="34"
+     inkscape:window-maximized="1"
+     showguides="false">
+    <inkscape:grid
+       type="xygrid"
+       id="grid1555" />
+  </sodipodi:namedview>
+  <metadata
+     id="metadata5">
+    <rdf:RDF>
+      <cc:Work
+         rdf:about="">
+        <dc:format>image/svg+xml</dc:format>
+        <dc:type
+           rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
+        <dc:title></dc:title>
+      </cc:Work>
+    </rdf:RDF>
+  </metadata>
+  <g
+     inkscape:label="Layer 1"
+     inkscape:groupmode="layer"
+     id="layer1"
+     transform="translate(-17.708866,-7.6161804)">
+    <rect
+       id="rect815"
+       width="75.370003"
+       height="75.370003"
+       x="18.708866"
+       y="8.6161804"
+       rx="14.999997"
+       ry="14.999997"
+       style="opacity:1;fill:#cf4b3f;fill-opacity:1;stroke:#000000;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
+    <path
+       d="m 82.020654,46.301176 c 0,14.156428 -11.474184,25.626794 -25.626786,25.626794 -14.1526,0 -25.626788,-11.470366 -25.626788,-25.626794 0,-14.148153 11.474188,-25.626783 25.626788,-25.626783 14.152602,0 25.626786,11.47863 25.626786,25.626783 z m -25.626786,5.16669 c -2.625714,0 -4.753357,2.128165 -4.753357,4.75336 0,2.6252 2.127643,4.753357 4.753357,4.753357 2.624678,0 4.753356,-2.128157 4.753356,-4.753357 0,-2.625195 -2.128678,-4.75336 -4.753356,-4.75336 z m -4.512589,-17.085832 0.765704,14.053403 c 0.03616,0.657614 0.579703,1.172427 1.238972,1.172427 h 5.015825 c 0.658236,0 1.202805,-0.514813 1.237938,-1.172427 L 60.906456,34.382034 C 60.945736,33.67172 60.379454,33.07445 59.668515,33.07445 h -6.549296 c -0.711969,0 -1.277207,0.59727 -1.23794,1.307584 z"
+       id="path5342"
+       inkscape:connector-curvature="0"
+       style="fill:#ffffff;stroke-width:0.10333381;fill-opacity:1" />
+  </g>
+</svg>

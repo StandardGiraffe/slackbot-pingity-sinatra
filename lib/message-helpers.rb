@@ -56,25 +56,25 @@ def get_status_decorators(status:, target:)
   case status
   when "pass"
     {
-      url: "https://www.tutorialspoint.com/ruby/images/ruby-mini-logo.jpg",
+      url: "https://www.dropbox.com/s/r75izoo984f1xo3/pingity-badge-passing.png",
       alt_text: "#{target} is passing",
       color: "#8cc54b"
     }
   when "warning"
     {
-      url: "https://www.tutorialspoint.com/ruby/images/ruby-mini-logo.jpg",
+      url: "https://www.dropbox.com/s/k98tl01bvibas93/pingity-badge-warning.png",
       alt_text: "#{target} is raising warnings",
       color: "#faaf42"
     }
   when "fail_critical"
     {
-      url: "https://www.tutorialspoint.com/ruby/images/ruby-mini-logo.jpg",
+      url: "https://www.dropbox.com/s/rk1sclsh1jgcgu8/pingity-badge-failing.png",
       alt_text: "#{target} is failing",
       color: "#cf4b3f"
     }
   else
     {
-      url: "https://www.tutorialspoint.com/ruby/images/ruby-mini-logo.jpg",
+      url: "https://www.dropbox.com/s/rk1sclsh1jgcgu8/pingity-badge-failing.png",
       alt_text: "#{target} is inconclusive for some reason...",
       color: "#b0b0a6"
     }
@@ -115,7 +115,7 @@ def pending_attachments(uri:)
           },
           "accessory": {
             "type": "image",
-            "image_url": "https://www.tutorialspoint.com/ruby/images/ruby-mini-logo.jpg",
+            "image_url": "https://www.dropbox.com/s/zgglmknetilaziu/pingity-badge-pending.png",
             "alt_text": "#{uri} is being tested..."
           }
         },

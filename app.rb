@@ -9,7 +9,11 @@ require './lib/message-helpers'
 
 class API < Sinatra::Base
   post '/command' do
-    verify_token(params['token'])
+    # Token verification is depricated.  Use #verify_signature instead if possible.
+    # verify_token(params['token'])
+    verify_signature
+
+    p request.env
 
     # Route the received command
     case params['command']
@@ -33,7 +37,9 @@ class API < Sinatra::Base
     payload = JSON.parse(params['payload'])
     puts payload.to_json
 
-    verify_token(payload['token'])
+    # Token verification is depircated.  Use #verify_signature instead if possible.
+    # verify_token(payload['token'])
+    verify_signature
 
     action = payload['actions'].first['action_id']
 
