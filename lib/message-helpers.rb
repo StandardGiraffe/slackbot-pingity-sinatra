@@ -45,6 +45,28 @@ def send_message(team_id:, channel:, ts: nil, text: nil, blocks: nil, attachment
 end
 
 #
+# Sends a direct message to the specified user, accepting the same parameters as #send_message
+#
+# @param [String] team_id ID of the team
+# @param [String] user_id Intended recipient's Slack ID
+# @param [String] text A simple text string to send, or the alt message if blocks are included
+# @param [Array] blocks (Optional) message blocks.  If provided, the text argument will not be shown to the user.
+# @param [Array] attachments (Optional) attachment blocks.  These will be appended to the message if provided.
+#
+# @return [Obj] Response object for the message sent
+#
+def send_dm(team_id:, user_id:, text: nil, blocks: nil, attachments: nil)
+  channel_id = $teams[team_id]['client'].conversations_open(
+    {
+      users: user_id,
+      return_im: true
+    }
+  )['channel']['id']
+
+  send_message(team_id: team_id, channel: channel_id, text: text, blocks: blocks, attachments: attachments)
+end
+
+#
 # Returns status image and alt-text for a tested resource.
 #
 # @param [String] status Accepts 'pass', 'warning', and 'fail_critical'
@@ -202,49 +224,21 @@ def send_error(params:, error:)
     channel: params['channel_id'],
     user: params['user_id'],
     text: "Error: #{error.to_s}",
-    blocks: error_blocks(error)
-  )
-end
-
-def error_blocks(error)
-  { ping_command_missing_argument: [
+    blocks: [
       {
         "type": "section",
         "text": {
           "type": "mrkdwn",
-          "text": "*Argument Missing: * `/ping` requires a URI (eg. `/ping example.com`)"
-        }
-      }
-    ],
-
-    monitor_command_missing_uri: [
-      {
-        "type": "section",
-        "text": {
-          "type": "mrkdwn",
-          "text": "*Argument Missing: * `/monitor` requires a web address (eg. `/monitor example.com 10`)"
-        }
-      }
-    ],
-
-    monitor_command_email_disallowed: [
-      {
-        "type": "section",
-        "text": {
-          "type": "mrkdwn",
-          "text": "*Argument Invalid: * Email addresses are not available for `/monitor`ing at this time.  Sorry!"
-        }
-      }
-    ],
-
-    monitor_command_missing_period: [
-      {
-        "type": "section",
-        "text": {
-          "type": "mrkdwn",
-          "text": "*Argument Missing: * `/monitor` requires a number of minutes to monitor the web address (eg. `/monitor example.com 10`)"
+          "text": error_text(error)
         }
       }
     ]
+  )
+end
+
+def error_text(error)
+  { ping_command_missing_argument: "*Argument Missing: * `/ping` requires a URI (eg. `/ping example.com`)",
+    monitor_command_missing_uri: "*Argument Missing: * `/monitor` requires a web address (eg. `/monitor example.com 10`)",
+    monitor_command_email_disallowed: "*Argument Invalid: * Email addresses are not available for `/monitor`ing at this time.  Sorry!"
   }[error]
 end

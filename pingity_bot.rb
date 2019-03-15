@@ -71,5 +71,7 @@ class PingityBot
   def self.monitor(request_data:, uri:, monitoring_period:)
     team_id = request_data['team_id']
     user_id = request_data['user_id']
+    text = "Hey, the URI I received is \"#{uri}\" and the monitoring period is #{monitoring_period} #{"minute".pluralize(monitoring_period)}!  Hope that's okay."
+    send_dm(team_id: team_id, user_id: user_id, text: text)
   end
 end
