@@ -215,6 +215,36 @@ def error_blocks(error)
           "text": "*Argument Missing: * `/ping` requires a URI (eg. `/ping example.com`)"
         }
       }
+    ],
+
+    monitor_command_missing_uri: [
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": "*Argument Missing: * `/monitor` requires a web address (eg. `/monitor example.com 10`)"
+        }
+      }
+    ],
+
+    monitor_command_email_disallowed: [
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": "*Argument Invalid: * Email addresses are not available for `/monitor`ing at this time.  Sorry!"
+        }
+      }
+    ],
+
+    monitor_command_missing_period: [
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": "*Argument Missing: * `/monitor` requires a number of minutes to monitor the web address (eg. `/monitor example.com 10`)"
+        }
+      }
     ]
   }[error]
 end

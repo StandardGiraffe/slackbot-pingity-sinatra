@@ -67,4 +67,9 @@ class PingityBot
       attachments: results_attachments(target: target, decorators: decorators, timestamp: timestamp, status: status)
     )
   end
+
+  def self.monitor(request_data:, uri:, monitoring_period:)
+    team_id = request_data['team_id']
+    user_id = request_data['user_id']
+  end
 end

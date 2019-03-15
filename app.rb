@@ -13,8 +13,6 @@ class API < Sinatra::Base
     # verify_token(params['token'])
     verify_signature
 
-    p request.env
-
     # Route the received command
     case params['command']
     when '/ping'
@@ -24,6 +22,23 @@ class API < Sinatra::Base
         send_error(params: params, error: :ping_command_missing_argument)
       else
         PingityBot.ping(request_data: params, uri: uri)
+      end
+
+    when '/monitor'
+      puts "Hey!  I got a /monitor request!  Neat!"
+      puts params['user_id']
+
+      uri = params['text'].split.first
+      monitoring_period = params['text'].split.second.to_i
+
+      if uri == nil
+        send_error(params: params, error: :monitor_command_missing_uri)
+      elsif uri.include?("@")
+        send_error(params: params, error: :monitor_command_email_disallowed)
+      elsif monitoring_period == 0
+        send_error(params: params, error: :monitor_command_missing_period)
+      else
+        PingityBot.monitor(request_data: params, uri: uri, monitoring_period: monitoring_period)
       end
 
     else
