@@ -1,6 +1,6 @@
 require 'pingity'
 
-class PingityBot
+module PingityBot
   def self.ping(request_data:, uri:)
     team_id = request_data['team_id']
     channel = request_data['channel_id']
@@ -71,7 +71,9 @@ class PingityBot
   def self.monitor(request_data:, uri:, monitoring_period:)
     team_id = request_data['team_id']
     user_id = request_data['user_id']
-    text = "Hey, the URI I received is \"#{uri}\" and the monitoring period is #{monitoring_period} #{"minute".pluralize(monitoring_period)}!  Hope that's okay."
+    text = "Hey, the URI I received is \"#{uri}\" and the monitoring period is #{monitoring_period} #{"second".pluralize(monitoring_period)}!  Hope that's okay."
     send_dm(team_id: team_id, user_id: user_id, text: text)
+    sleep monitoring_period
+    send_dm(team_id: team_id, user_id: user_id, text: "... And we're done here.")
   end
 end

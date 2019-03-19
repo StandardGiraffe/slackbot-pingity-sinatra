@@ -151,7 +151,8 @@ def pending_attachments(uri:)
                 "emoji": true,
                 "text": "Or, try it on Pingity.com"
               },
-              "url": ENV['PINGITY_API_BASE']
+              "url": ENV['PINGITY_API_BASE'],
+              "action_id": "redirect_to_pingity"
             }
           ]
         }
@@ -199,7 +200,8 @@ def results_attachments(target:, decorators:, timestamp:, status:)
                 "emoji": true,
                 "text": "Details on Pingity.com"
               },
-              "url": "#{ENV['PINGITY_API_BASE']}?target=#{target}"
+              "url": "#{ENV['PINGITY_API_BASE']}?target=#{target}",
+              "action_id": "redirect_to_pingity"
             },
             {
               "type": "button",
