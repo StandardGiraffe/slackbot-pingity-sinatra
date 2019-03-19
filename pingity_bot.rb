@@ -71,9 +71,9 @@ module PingityBot
   def self.monitor(request_data:, uri:, monitoring_period:)
     team_id = request_data['team_id']
     user_id = request_data['user_id']
+    endtime = Time.now.to_i + (monitoring_period * 60)
+
     text = "Hey, the URI I received is \"#{uri}\" and the monitoring period is #{monitoring_period} #{"second".pluralize(monitoring_period)}!  Hope that's okay."
-    send_dm(team_id: team_id, user_id: user_id, text: text)
-    sleep monitoring_period
-    send_dm(team_id: team_id, user_id: user_id, text: "... And we're done here.")
+    send_dm(team_id: team_id, user_id: user_id, text: text, blocks: monitor_header_blocks(uri: uri, endtime: endtime))
   end
 end

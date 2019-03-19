@@ -7,11 +7,12 @@ require 'slack-ruby-client'
 require './pingity_bot'
 require './lib/verification-helpers'
 require './lib/message-helpers'
+require './lib/ping-helpers'
+require './lib/monitor-helpers'
 
 class API < Sinatra::Base
-
   # The minimum and maximum number of minutes to monitor a given URI
-  MONITORING_PERIOD_CLAMP = [ 5, 60 ]
+  MONITORING_PERIOD_CLAMP = [ 1, 60 ]
 
   attr_reader :threads
 
@@ -22,7 +23,7 @@ class API < Sinatra::Base
     @threads = Queue.new
     Thread.new do
       while thread = @threads.pop
-        puts "Threadkiller is inhuming #{thread.inspect}"
+        puts "Threadkiller is inhuming #{thread.inspect}; #{Thread.list.size - 1} #{"thread".pluralize(Thread.list.size - 1)} left."
         thread.join
       end
     end
@@ -45,11 +46,12 @@ class API < Sinatra::Base
   end
 
   post '/command' do
-    # Token verification is depricated.  Use #verify_signature instead if possible.
-    # verify_token(params['token'])
-    verify_signature
 
     in_background do
+      # Token verification is depricated.  Use #verify_signature instead if possible.
+      # verify_token(params['token'])
+      verify_signature
+
       # Route the received command
       case params['command']
       when '/ping'
@@ -84,11 +86,11 @@ class API < Sinatra::Base
   post '/actions' do
     payload = JSON.parse(params['payload'])
 
-    # Token verification is depircated.  Use #verify_signature instead if possible.
-    # verify_token(payload['token'])
-    verify_signature
-
     in_background do
+      # Token verification is depircated.  Use #verify_signature instead if possible.
+      # verify_token(payload['token'])
+      verify_signature
+
       p payload['actions']
       action = payload['actions'].first['action_id']
       puts action
@@ -100,7 +102,7 @@ class API < Sinatra::Base
         puts "Redirected a user to the Pingity website."
       else
         puts "WARNING: WEIRD ACTION PAYLOAD RECEIVED.  REJECTED: #{action}"
-        halt 404, "WARNING: WEIRD ACTION PAYLOAD RECEIVED.  REJECTED: #{action}"
+        # halt 404, "WARNING: WEIRD ACTION PAYLOAD RECEIVED.  REJECTED: #{action}"
       end
     end
 
