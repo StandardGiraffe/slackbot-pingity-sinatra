@@ -16,6 +16,7 @@ def send_message(team_id:, channel:, ts: nil, text: nil, blocks: nil, attachment
     as_user: 'true',
     channel: channel,
     unfurl_media: false,
+    unfurl_links: false,
     mrkdwn: true
   }
 

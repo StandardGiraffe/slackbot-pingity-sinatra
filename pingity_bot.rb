@@ -57,34 +57,42 @@ module PingityBot
     user_id = request_data['user_id']
     endtime = Time.now.to_i + (monitoring_period * 60)
 
-    text = "Pingity is attempting to monitor \"#{uri}\" for the next #{monitoring_period} #{"minute".pluralize(monitoring_period)}."
     ts = send_dm(
       team_id: team_id,
       user_id: user_id,
-      text: text,
+      text: monitor_header_text(uri: uri, monitoring_period: monitoring_period),
       blocks: monitor_header_blocks(uri: uri, endtime: endtime)
     )['ts']
 
-    report = self.report_on_uri(uri)
+    initial_report = self.report_on_uri(uri)
 
-    text = "Pingity is attempting to monitor \"#{report[:target]}\" for the next #{monitoring_period} #{"minute".pluralize(monitoring_period)}."
-    dm_data = { team_id: team_id, user_id: user_id, ts: ts, text: text }
+    dm_data = { team_id: team_id, user_id: user_id, ts: ts }
 
     # Updates the header with the canonized URI
     send_dm(
-      team_id: team_id,
-      user_id: user_id,
-      text: text,
-      ts: ts,
-      blocks: monitor_header_blocks(uri: report[:target], endtime: endtime)
+      dm_data.merge(
+        text: monitor_header_text(uri: initial_report[:target], monitoring_period: monitoring_period),
+        blocks: monitor_header_blocks(uri: initial_report[:target], endtime: endtime)
+      )
     )
 
-    feedback = self.begin_monitoring(endtime: endtime, report: report, dm_data: dm_data)
+    # Conduct the actual monitoring period, capturing the final report and the number of times the status changed during that period
+    final_report, status_changes = self.begin_monitoring(endtime: endtime, report: initial_report, dm_data: dm_data)
+    dm_data.delete(:ts)
 
-    # Send a fresh DM with the results.
+    send_dm(
+      dm_data.merge(
+        monitor_conclusion_content(
+          initial_report: initial_report,
+          final_report: final_report,
+          status_changes: status_changes
+        )
+      )
+    )
+
   end
 
-  private
+private
 
   #
   # Conducts a Pingity report on a given uri
@@ -112,12 +120,13 @@ module PingityBot
     initial_status = report[:status]
     current_status = initial_status
     previous_status = nil
+    status_changes = 0
 
     monitoring_feed = {
       attachments: [
         monitor_status_attachment(
           decorators: report[:decorators],
-          text: "Initial status of #{report[:target]} was #{initial_status} at #{human_readable_time(report[:timestamp], true)}"
+          text: "*#{human_readable_time(report[:timestamp], true)}:* Initial status of #{report[:target]} was #{initial_status}"
         )
       ]
     }
@@ -130,7 +139,7 @@ module PingityBot
         # Status hasn't changed...
         monitoring_feed_addendum = monitor_status_attachment(
           decorators: report[:decorators],
-          text: "Current status of #{report[:target]} remains #{report[:status]} as of #{human_readable_time(report[:timestamp], true)}"
+          text: "*#{human_readable_time(report[:timestamp], true)}:* Current status of #{report[:target]} remains #{report[:status]}"
         )
 
         if report[:status] == previous_status
@@ -148,10 +157,11 @@ module PingityBot
         # The status has changed and we need to hear about it.
         monitoring_feed[:attachments].push monitor_status_attachment(
           decorators: report[:decorators],
-          text: "*NOTICE: *Status of #{report[:target]} changed from #{current_status} to #{report[:status]} at #{human_readable_time(report[:timestamp])}"
+          text: "*#{human_readable_time(report[:timestamp], true)}: NOTICE:* Status of #{report[:target]} changed from #{current_status} to #{report[:status]}"
           )
           previous_status = current_status
           current_status = report[:status]
+          status_changes += 1
         end
 
       send_dm(dm_data.merge(monitoring_feed))
@@ -159,6 +169,13 @@ module PingityBot
       sleep 5
     end
 
-    # Send a final update to the monitoring_feed to sign off with the results.
+    monitoring_feed[:attachments].push monitor_status_attachment(
+      decorators: report[:decorators],
+      text: "*#{human_readable_time(report[:timestamp], true)}: Monitoring has ended.*  Final status of #{report[:target]} was #{report[:status]}."
+    )
+
+    send_dm(dm_data.merge(monitoring_feed))
+
+    [ report, status_changes ]
   end
 end

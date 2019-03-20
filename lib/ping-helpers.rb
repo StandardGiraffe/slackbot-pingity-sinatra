@@ -4,7 +4,7 @@ def pending_blocks(uri:)
       "type": "section",
       "text": {
         "type": "mrkdwn",
-        "text": "*<https://pingity.com|Pingty> is trying to test \"#{uri}\"...*"
+        "text": "*<https://pingity.com|Pingity> is trying to test \"#{uri}\"...*"
       }
     }
   ]
@@ -53,7 +53,7 @@ def results_blocks(target:)
       "type": "section",
       "text": {
         "type": "mrkdwn",
-        "text": "*<https://pingity.com|Pingty> results for #{target}: *"
+        "text": "*<https://pingity.com|Pingity> results for #{target}: *"
       }
     }
   ]
