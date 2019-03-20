@@ -81,7 +81,7 @@ module PingityBot
 
     feedback = self.begin_monitoring(endtime: endtime, report: report, dm_data: dm_data)
 
-
+    # Send a fresh DM with the results.
   end
 
   private
@@ -110,20 +110,55 @@ module PingityBot
 
   def self.begin_monitoring(endtime:, report:, dm_data:)
     initial_status = report[:status]
-    monitoring_feed = {
-      attachments: monitor_status_attachment(
-        decorators: report[:decorators],
-        text: "Initial status of #{report[:target]} was #{initial_status} at #{human_readable_time(report[:timestamp])}"
-      )
-    }
-    dm = dm_data.merge(monitoring_feed)
+    current_status = initial_status
+    previous_status = nil
 
-    send_dm(dm)
+    monitoring_feed = {
+      attachments: [
+        monitor_status_attachment(
+          decorators: report[:decorators],
+          text: "Initial status of #{report[:target]} was #{initial_status} at #{human_readable_time(report[:timestamp], true)}"
+        )
+      ]
+    }
+    send_dm(dm_data.merge(monitoring_feed))
 
     while Time.now.to_i < endtime do
+      report = self.report_on_uri(report[:target])
+
+      if report[:status] == current_status
+        # Status hasn't changed...
+        monitoring_feed_addendum = monitor_status_attachment(
+          decorators: report[:decorators],
+          text: "Current status of #{report[:target]} remains #{report[:status]} as of #{human_readable_time(report[:timestamp], true)}"
+        )
+
+        if report[:status] == previous_status
+          # ... and is also the same as the previous status, so just the time signature should change.
+          monitoring_feed[:attachments][-1] = monitoring_feed_addendum
+
+        else
+          # ... and is different from the previous status, so we need a new line.
+          monitoring_feed[:attachments].push monitoring_feed_addendum
+
+          previous_status = current_status
+        end
+
+      else
+        # The status has changed and we need to hear about it.
+        monitoring_feed[:attachments].push monitor_status_attachment(
+          decorators: report[:decorators],
+          text: "*NOTICE: *Status of #{report[:target]} changed from #{current_status} to #{report[:status]} at #{human_readable_time(report[:timestamp])}"
+          )
+          previous_status = current_status
+          current_status = report[:status]
+        end
+
+      send_dm(dm_data.merge(monitoring_feed))
+
       sleep 5
-
-
     end
+
+    # Send a final update to the monitoring_feed to sign off with the results.
   end
 end

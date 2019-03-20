@@ -16,21 +16,19 @@ end
 # @param [String] text Markdown-formatted text for the attachment block
 # @param [Hash] decorators Decorators hash containing the appropriate colour for the report
 #
-# @return [Array] Returns a status update attachment.
+# @return [Hash] Returns a status update attachment.
 #
 def monitor_status_attachment(text:, decorators:)
-  [
-    {
-      "color": decorators[:color],
-      "blocks": [
-        {
-          "type": "section",
-          "text": {
-            "type": "mrkdwn",
-            "text": text
-          }
+  {
+    "color": decorators[:color],
+    "blocks": [
+      {
+        "type": "section",
+        "text": {
+          "type": "mrkdwn",
+          "text": text
         }
-      ]
-    }
-  ]
+      }
+    ]
+  }
 end

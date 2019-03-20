@@ -88,8 +88,20 @@ def human_readable_status(status)
   }[status]
 end
 
-def human_readable_time(timestamp)
-  "<!date^#{timestamp}^{date_short_pretty} at {time}|Timestamp unavailable, sorry.>"
+#
+# Outputs a Slack-parsable string intended to display the date and time nicely
+#
+# @param [Integer] timestamp Unix Epoch timestamp
+# @param [Boolean] precise (Default FALSE) If true, a more precise timestamp will be returned
+#
+# @return [String] Timestamp in human-readable format
+#
+def human_readable_time(timestamp, precise = false)
+  unless precise
+    "<!date^#{timestamp}^{date_short_pretty} at {time}|Timestamp unavailable, sorry.>"
+  else
+    "<!date^#{timestamp}^{date_num} at {time_secs}|Timestamp unavailable, sorry.>"
+  end
 end
 
 def send_error(params:, error:)
