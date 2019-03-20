@@ -88,6 +88,10 @@ def human_readable_status(status)
   }[status]
 end
 
+def human_readable_time(timestamp)
+  "<!date^#{timestamp}^{date_short_pretty} at {time}|Timestamp unavailable, sorry.>"
+end
+
 def send_error(params:, error:)
   send_message(
     team_id: params['team_id'],

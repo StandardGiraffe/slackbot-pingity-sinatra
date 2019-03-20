@@ -68,7 +68,7 @@ def results_attachments(target:, decorators:, timestamp:, status:)
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "*Overall Status:*\n#{status}\n*Current as of:*\n<!date^#{timestamp}^{date_short_pretty} at {time}|Timestamp unavailable, sorry.>"
+            "text": "*Overall Status:*\n#{status}\n*Current as of:*\n#{human_readable_time(timestamp)}"
           },
           "accessory": {
             "type": "image",
