@@ -1,15 +1,15 @@
 GIT
   remote: https://github.com/StandardGiraffe/pingity-gem.git
-  revision: e0e5981874ae1ccf156e4e5e015718eeb07ddec2
+  revision: b5f453404aea96055602577bf0f3555f67ceeda7
   specs:
-    pingity (1.2.1)
+    pingity (1.2.3)
       dotenv (~> 2.6)
       faraday (~> 0.15)
 
 GEM
   remote: https://rubygems.org/
   specs:
-    activesupport (5.2.2)
+    activesupport (5.2.2.1)
       concurrent-ruby (~> 1.0, >= 1.0.2)
       i18n (>= 0.7, < 2)
       minitest (~> 5.1)

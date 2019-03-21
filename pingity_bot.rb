@@ -2,27 +2,7 @@ require 'pingity'
 
 module PingityBot
   def self.ping(request_data:, uri:)
-    team_id = request_data['team_id']
-    channel = request_data['channel_id']
-
-    ts = send_message(
-      team_id: team_id,
-      channel: channel,
-      text: "I'm attempting to ping \"#{uri}\".\nJust a moment, please...",
-      blocks: pending_blocks(uri: uri),
-      attachments: pending_attachments(uri: uri)
-    )['ts']
-
-    report = self.report_on_uri(uri)
-
-    send_message(
-      team_id: team_id,
-      channel: channel,
-      ts: ts,
-      text: "Pingity tested \"#{report[:target]}\": #{report[:status]}",
-      blocks: results_blocks(target: report[:target]),
-      attachments: results_attachments(target: report[:target], decorators: report[:decorators], timestamp: report[:timestamp], status: report[:status])
-    )
+    PingityBot::Operation::Ping.new(request_data, uri: uri)
   end
 
   def self.refresh_result(payload:)
@@ -89,7 +69,6 @@ module PingityBot
         )
       )
     )
-
   end
 
 private
@@ -101,7 +80,7 @@ private
   #
   # @return [Hash] A hash containing the :raw report, overall :status, canonized URI as a :target, :timestamp of the report, and :decorators hash.
   #
-  def self.report_on_uri(uri)
+  def self.report_on_uri(uri:, message_data:)
     report = Pingity::Report.new(
       uri,
       eager: true
@@ -114,6 +93,11 @@ private
       timestamp: report.timestamp.to_i,
       decorators: get_status_decorators(status: report.status, target: uri)
     }
+
+  rescue Pingity::CredentialsError => e
+    puts e.message
+    puts gem_error_message(Pingity::CredentialsError)
+    send_message(team_id: team_id, channel: channel, ts: ts, text: "*Configuration Error:*\n#{gem_error_message(error)}")
   end
 
   def self.begin_monitoring(endtime:, report:, dm_data:)
@@ -179,3 +163,5 @@ private
     [ report, status_changes ]
   end
 end
+
+require_relative './lib/pingity_bot/operation'

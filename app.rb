@@ -6,7 +6,7 @@ require 'slack-ruby-client'
 
 require './pingity_bot'
 require './lib/verification-helpers'
-require './lib/message-helpers'
+require_relative './lib/message_helpers'
 require './lib/ping-helpers'
 require './lib/monitor-helpers'
 
@@ -67,9 +67,10 @@ class API < Sinatra::Base
         uri = params['text'].split.first
         monitoring_period = params['text'].split.second.to_i.clamp(MONITORING_PERIOD_CLAMP[0], MONITORING_PERIOD_CLAMP[1])
 
-        if uri == nil
+        case uri
+        when nil, /\A\s*\z/
           send_error(params: params, error: :monitor_command_missing_uri)
-        elsif uri.include?("@")
+        when /@/
           send_error(params: params, error: :monitor_command_email_disallowed)
         else
           PingityBot.monitor(request_data: params, uri: uri, monitoring_period: monitoring_period)
