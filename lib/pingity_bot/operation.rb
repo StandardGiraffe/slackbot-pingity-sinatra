@@ -72,7 +72,7 @@ protected
       decorators: get_status_decorators(status: report.status, target: uri)
     }
 
-  rescue Pingity::CredentialsError => e
+  rescue Pingity::CredentialsError, Pingity::ServiceUnreachableError, Pingity::InternalServerError, Pingity::UnexpectedResponseContentError, Pingity::NoStatusCodeGivenError => e
     puts e.message
     puts error_text(e)
     send_error(error: e)

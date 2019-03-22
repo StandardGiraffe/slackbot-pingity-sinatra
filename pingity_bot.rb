@@ -57,25 +57,25 @@ private
   #
   # @return [Hash] A hash containing the :raw report, overall :status, canonized URI as a :target, :timestamp of the report, and :decorators hash.
   #
-  def self.report_on_uri(uri:, message_data:)
-    report = Pingity::Report.new(
-      uri,
-      eager: true
-    )
+  # def self.report_on_uri(uri:, message_data:)
+  #   report = Pingity::Report.new(
+  #     uri,
+  #     eager: true
+  #   )
 
-    {
-      raw: report.result,
-      status: human_readable_status(report.status),
-      target: report.target,
-      timestamp: report.timestamp.to_i,
-      decorators: get_status_decorators(status: report.status, target: uri)
-    }
+  #   {
+  #     raw: report.result,
+  #     status: human_readable_status(report.status),
+  #     target: report.target,
+  #     timestamp: report.timestamp.to_i,
+  #     decorators: get_status_decorators(status: report.status, target: uri)
+  #   }
 
-  rescue Pingity::CredentialsError => e
-    puts e.message
-    puts gem_error_message(Pingity::CredentialsError)
-    send_message(team_id: team_id, channel_id: channel, ts: ts, text: "*Configuration Error:*\n#{gem_error_message(error)}")
-  end
+  # rescue Pingity::CredentialsError => e
+  #   puts e.message
+  #   puts gem_error_message(Pingity::CredentialsError)
+  #   send_message(team_id: team_id, channel_id: channel, ts: ts, text: "*Configuration Error:*\n#{gem_error_message(error)}")
+  # end
 
   def self.begin_monitoring(endtime:, report:, dm_data:)
     initial_status = report[:status]

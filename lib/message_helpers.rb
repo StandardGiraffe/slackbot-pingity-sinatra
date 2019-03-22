@@ -4,7 +4,11 @@ module MessageHelpers
     ping_command_missing_argument: "*Argument Missing: * `/ping` requires a URI (eg. `/ping example.com`)",
     monitor_command_missing_uri: "*Argument Missing: * `/monitor` requires a web address (eg. `/monitor example.com 10`)",
     monitor_command_email_disallowed: "*Argument Invalid: * Email addresses are not available for `/monitor`ing at this time.  Sorry!",
-    Pingity::CredentialsError => "*Configuration Error:* \nPingityBot's credentials were rejected by #{ENV['PINGITY_API_BASE']}.  Ensure PingityBot's .env file contains a PINGITY_ID and PINGITY_SECRET that match your Pingity API Key's ID and Secret."
+    Pingity::CredentialsError => "*Configuration Error:* \nPingityBot's credentials were rejected by #{ENV['PINGITY_API_BASE']}.  Ensure PingityBot's `.env` file contains a `PINGITY_ID` and `PINGITY_SECRET` that match your Pingity API Key's ID and Secret.",
+    Pingity::ServiceUnreachableError => "*Service Error:* \n#{ENV['PINGITY_API_BASE']} is not responding.  The service might be down temporarily and you could try again later, or, if PingityBot was configured with a manual endpoint, `PINGITY_API_BASE` might be set incorrectly in the `.env` file.",
+    Pingity::InternalServerError => "*Service Error:* \nSomething about this request is causing Pingity to crash.  Please let us know immediately!",
+    Pingity::UnexpectedResponseContentError => "*Service Error:* \nUnexpected content returned by this request.  Please let us know immediately!",
+    Pingity::NoStatusCodeGivenError => "*Service Error:* \nNo status code was given in response to this request.  That's weird.  Please let us know immediately!"
   }
 
   # Posts or updates a bot message via Slack's Web API.  Will automatically update rather than post if a timestamp (ts) is included.
@@ -60,6 +64,14 @@ module MessageHelpers
       as_user: 'true',
       channel: @channel_id,
       ts: @ts
+    )
+  end
+
+  def delete_message!(ts)
+    $teams[@team_id]['client'].chat_delete(
+      as_user: 'true',
+      channel: @channel_id,
+      ts: ts
     )
   end
 
