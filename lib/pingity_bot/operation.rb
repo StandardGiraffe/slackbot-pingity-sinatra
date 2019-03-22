@@ -75,9 +75,10 @@ protected
   rescue Pingity::CredentialsError => e
     puts e.message
     puts gem_error_message(Pingity::CredentialsError)
-    send_message(team_id: @team_id, channel: @channel_id, ts: @ts, text: "*Configuration Error:*\n#{gem_error_message(error)}")
+    send_message(team_id: @team_id, channel_id: @channel_id, ts: @ts, text: "*Configuration Error:*\n#{gem_error_message(error)}")
   end
-
 end
 
 require_relative './operation/ping'
+require_relative './operation/refresh_ping'
+require_relative './operation/monitor'

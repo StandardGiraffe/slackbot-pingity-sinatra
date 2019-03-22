@@ -2,45 +2,46 @@ module MessageHelpers
 
   # Posts or updates a bot message via Slack's Web API.  Will automatically update rather than post if a timestamp (ts) is included.
   #
-  # @param [String] team_id Slack's ID for the Team/Workspace to send the message to
-  # @param [String] channel Slack's ID for the channel where the request was made
-  # @param [Float] ts (Optional) Timestamp of the bot's previous message.  If included, the specified message will be updated, rather than a new message posted.
+  # @param [String] channel (optional) A specific channel id to post to; defaults to the channel where the request was made
+  # @param [Float] ts (Optional) Timestamp of a previous message sent by the bot.  If included and if update: true, the post will replace the existing message at this timestamp rather than the most recent message.
+  # @param [Boolean] update (Optional) If provided, the specified message will replace the post with the provided timestamp, :ts, or the most recent message posted, by default.
   # @param [String] text (optional) Simple message.  If a blocks argument is also provided, text will not be printed (but may be displayed on notifications), and should be non-critical.
   # @param [Array] blocks (optional) Array of one or more message blocks (hashes).  If included, the text param will not be shown on the Slack channel (but may be displayed on notifications).
   # @param [Array] attachments (optional) Array of one or more message attachments (hashes).
-  # @param [String] user (optional) User ID.  If included, the specified message will be sent as an ephemeral message only to the specified user.
+  # @param [String] user_id (optional) User ID.  If included and ephemeral: true, an ephemeral message will be sent to the specified user.
+  # @param [Boolean] ephemeral (optional) If included, the specified message will be sent as an ephemeral message only to the specified user, or to the triggering user if not specified.
   #
   # @return [Hash] API response
   #
-  def send_message(team_id:, channel:, ts: nil, text: nil, blocks: nil, attachments: nil, user: nil)
+  def send_message(**args)
     message = {
       as_user: 'true',
-      channel: channel,
+      channel: args[:channel_id] || @channel_id,
       unfurl_media: false,
       unfurl_links: false,
       mrkdwn: true
     }
 
-    if text
-      message.merge!({ text: text })
+    if args[:text]
+      message.merge!({ text: args[:text] })
     end
 
-    if blocks
-      message.merge!({ blocks: blocks })
+    if args[:blocks]
+      message.merge!({ blocks: args[:blocks] })
     end
 
-    if attachments
-      message.merge!({ attachments: attachments })
+    if args[:attachments]
+      message.merge!({ attachments: args[:attachments] })
     end
 
-    if ts
-      message.merge!({ ts: ts })
-      response = $teams[team_id]['client'].chat_update(message)
-    elsif user
-      message.merge!({ user: user })
-      response = $teams[team_id]['client'].chat_postEphemeral(message)
+    if args[:update]
+      message.merge!({ ts: args[:ts] || @ts })
+      response = $teams[@team_id]['client'].chat_update(message)
+    elsif args[:ephemeral]
+      message.merge!({ user: args[:user_id] || @user_id })
+      response = $teams[@team_id]['client'].chat_postEphemeral(message)
     else
-      response = $teams[team_id]['client'].chat_postMessage(message)
+      response = $teams[@team_id]['client'].chat_postMessage(message)
     end
 
     response
@@ -49,34 +50,33 @@ module MessageHelpers
   #
   # Sends a direct message to the specified user, accepting the same parameters as #send_message
   #
-  # @param [String] team_id ID of the team
-  # @param [String] user_id Intended recipient's Slack ID
-  # @param [String] text A simple text string to send, or the alt message if blocks are included
+  # @param [String] user_id (optional) Intended recipient's Slack ID; defaults to triggering user
+  # @param [String] text (optional) A simple text string to send, or the alt message if blocks are included
   # @param [Array] blocks (Optional) message blocks.  If provided, the text argument will not be shown to the user.
   # @param [Array] attachments (Optional) attachment blocks.  These will be appended to the message if provided.
-  # @param [Float] ts (Optional) Timestamp of the bot's previous message.  If included, the specified message will be updated, rather than a new message posted.
+  # @param [Boolean] ephemeral (optional) If included, the specified message will be sent as an ephemeral message only to the specified user, or to the triggering user if not specified.
+  # @param [Boolean] update (Optional) If provided, the specified message will replace the post with the provided timestamp, :ts, or the most recent message posted, by default.
+  # @param [Float] ts (Optional) Timestamp of a previous message sent by the bot.  If included and if update: true, the post will replace the existing message at this timestamp rather than the most recent message.
   #
   # @return [Obj] Response object for the message sent
   #
-  def send_dm(team_id:, user_id:, text: nil, blocks: nil, attachments: nil, ts: nil)
-    channel_id = $teams[team_id]['client'].conversations_open(
+  def send_dm(text: nil, blocks: nil, attachments: nil, update: false)
+    channel_id = $teams[@team_id]['client'].conversations_open(
       {
-        users: user_id,
+        users: args[:user_id] || @user_id,
         return_im: true
       }
     )['channel']['id']
 
     message = {
-      team_id: team_id,
-      channel: channel_id,
-      text: text,
-      blocks: blocks,
-      attachments: attachments
+      channel_id: channel_id,
+      text: args[:text],
+      blocks: args[:blocks],
+      attachments: args[:attachments],
+      ts: args[:ts],
+      update: args[:update],
+      ephemeral: args[:ephemeral]
     }
-
-    if ts
-      message.merge!({ ts: ts })
-    end
 
     send_message(message)
   end
@@ -109,7 +109,7 @@ module MessageHelpers
   def send_error(params:, error:)
     send_message(
       team_id: params['team_id'],
-      channel: params['channel_id'],
+      channel_id: params['channel_id'],
       user: params['user_id'],
       text: "Error: #{error.to_s}",
       blocks: [

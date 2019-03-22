@@ -1,25 +1,27 @@
 require_relative '../../ping_helpers'
 
-class PingityBot::Operation::Ping < PingityBot::Operation
+class PingityBot::Operation::RefreshPing < PingityBot::Operation
   include PingHelpers
 
-  state(:ping_sending_initial_notification) do
+  state(:refresh_ping_sending_initial_notification) do
     @ts = send_message(
+      ts: @original_ts,
+      update: true,
       text: "I'm attempting to ping \"#{@uri}\".\nJust a moment, please...",
       blocks: pending_blocks(uri: @uri),
       attachments: pending_attachments(uri: @uri)
-    )['ts']
+    )["ts"]
 
-    change_to_state!(:ping_reporting_on_uri)
+    change_to_state!(:refresh_ping_reporting_on_uri)
   end
 
-  state(:ping_reporting_on_uri) do
+  state(:refresh_ping_reporting_on_uri) do
     @report = self.report_on_uri(@uri)
 
-    change_to_state!(:ping_sending_final_notification)
+    change_to_state!(:refresh_ping_sending_final_notification)
   end
 
-  state(:ping_sending_final_notification) do
+  state(:refresh_ping_sending_final_notification) do
     send_message(
       update: true,
       text: "Pingity tested \"#{@report[:target]}\": #{@report[:status]}",

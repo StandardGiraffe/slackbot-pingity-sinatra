@@ -5,31 +5,8 @@ module PingityBot
     PingityBot::Operation::Ping.new(request_data, uri: uri)
   end
 
-  def self.refresh_result(payload:)
-    uri = payload["actions"].first["value"]
-    team_id = payload["team"]["id"]
-    channel = payload["channel"]["id"]
-    original_ts = payload["message"]["ts"]
-
-    ts = send_message(
-      team_id: team_id,
-      channel: channel,
-      ts: original_ts,
-      text: "I'm attempting to ping \"#{uri}\".\nJust a moment, please...",
-      blocks: pending_blocks(uri: uri),
-      attachments: pending_attachments(uri: uri)
-    )["ts"]
-
-    report = self.report_on_uri(uri)
-
-    send_message(
-      team_id: team_id,
-      channel: channel,
-      ts: ts,
-      text: "Pingity tested \"#{report[:target]}\": #{report[:status]}",
-      blocks: results_blocks(target: report[:target]),
-      attachments: results_attachments(target: report[:target], decorators: report[:decorators], timestamp: report[:timestamp], status: report[:status])
-    )
+  def self.refresh_ping(payload:)
+    PingityBot::Operation::RefreshPing.new(payload)
   end
 
   def self.monitor(request_data:, uri:, monitoring_period:)
@@ -97,7 +74,7 @@ private
   rescue Pingity::CredentialsError => e
     puts e.message
     puts gem_error_message(Pingity::CredentialsError)
-    send_message(team_id: team_id, channel: channel, ts: ts, text: "*Configuration Error:*\n#{gem_error_message(error)}")
+    send_message(team_id: team_id, channel_id: channel, ts: ts, text: "*Configuration Error:*\n#{gem_error_message(error)}")
   end
 
   def self.begin_monitoring(endtime:, report:, dm_data:)

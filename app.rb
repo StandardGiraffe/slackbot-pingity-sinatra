@@ -4,13 +4,16 @@ require 'sinatra/base'
 require 'thin'
 require 'slack-ruby-client'
 
-require './pingity_bot'
-require './lib/verification-helpers'
+require_relative './pingity_bot'
+require_relative './lib/verification_helpers'
 require_relative './lib/message_helpers'
-require './lib/ping-helpers'
-require './lib/monitor-helpers'
+# require './lib/ping-helpers'
+# require './lib/monitor-helpers'
 
 class API < Sinatra::Base
+  include VerificationHelpers
+  include MessageHelpers
+
   # The minimum and maximum number of minutes to monitor a given URI
   MONITORING_PERIOD_CLAMP = [ 1, 60 ]
 
@@ -77,7 +80,7 @@ class API < Sinatra::Base
         end
 
       else
-        send_message(team_id: params['team_id'], channel: params['channel_id'], text: "Received an unknown command: #{params['command']}")
+        send_message(team_id: params['team_id'], channel_id: params['channel_id'], text: "Received an unknown command: #{params['command']}")
       end
     end
 
@@ -98,11 +101,15 @@ class API < Sinatra::Base
 
       case action
       when 'refresh_result'
-        PingityBot.refresh_result(payload: payload)
+        PingityBot.refresh_ping(payload: payload)
       when 'redirect_to_pingity'
         puts "Redirected a user to the Pingity website."
       else
+        puts "**********"
         puts "WARNING: WEIRD ACTION PAYLOAD RECEIVED.  REJECTED: #{action}"
+        puts "\nPayload:"
+        p payload
+        puts "**********"
         # halt 404, "WARNING: WEIRD ACTION PAYLOAD RECEIVED.  REJECTED: #{action}"
       end
     end
