@@ -58,7 +58,7 @@ protected
   #
   # @return [Hash] A hash containing the :raw report, overall :status, canonized URI as a :target, :timestamp of the report, and :decorators hash.
   #
-  def report_on_uri(uri)
+  def report_on_uri(uri, **args)
     report = Pingity::Report.new(
       uri,
       eager: true
@@ -74,8 +74,10 @@ protected
 
   rescue Pingity::CredentialsError => e
     puts e.message
-    puts gem_error_message(Pingity::CredentialsError)
-    send_message(team_id: @team_id, channel_id: @channel_id, ts: @ts, text: "*Configuration Error:*\n#{gem_error_message(error)}")
+    puts error_text(e)
+    send_error(error: e)
+
+    :failure
   end
 end
 

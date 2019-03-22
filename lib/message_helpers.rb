@@ -1,5 +1,12 @@
 module MessageHelpers
 
+  ERROR_TEXT = {
+    ping_command_missing_argument: "*Argument Missing: * `/ping` requires a URI (eg. `/ping example.com`)",
+    monitor_command_missing_uri: "*Argument Missing: * `/monitor` requires a web address (eg. `/monitor example.com 10`)",
+    monitor_command_email_disallowed: "*Argument Invalid: * Email addresses are not available for `/monitor`ing at this time.  Sorry!",
+    Pingity::CredentialsError => "*Configuration Error:* \nPingityBot's credentials were rejected by #{ENV['PINGITY_API_BASE']}.  Ensure PingityBot's .env file contains a PINGITY_ID and PINGITY_SECRET that match your Pingity API Key's ID and Secret."
+  }
+
   # Posts or updates a bot message via Slack's Web API.  Will automatically update rather than post if a timestamp (ts) is included.
   #
   # @param [String] team_id (optional) A specific team id to post to; defaults to the team where the request was made
@@ -46,6 +53,14 @@ module MessageHelpers
     end
 
     response
+  end
+
+  def delete_last_message!
+    $teams[@team_id]['client'].chat_delete(
+      as_user: 'true',
+      channel: @channel_id,
+      ts: @ts
+    )
   end
 
   #
@@ -117,10 +132,9 @@ module MessageHelpers
   #
   def send_error(error:, **args)
     send_message(
-      team_id: args[:params]['team_id'] || @team_id,
-      channel_id: args[:params]['channel_id'] || @channel_id,
-      user_id: args[:params]['user_id'] || @user_id,
-      update: args[:update],
+      team_id: @team_id || args[:params]['team_id'],
+      channel_id: @channel_id || args[:params]['channel_id'],
+      user_id: @user_id || args[:params]['user_id'],
       ephemeral: true,
       text: "Error: #{error.to_s}",
       blocks: [
@@ -135,11 +149,20 @@ module MessageHelpers
     )
   end
 
+  #
+  # Returns human-readable error text given an error type
+  #
+  # @param [StandardError or Symbol] error The raw exception (if thrown by the Pingity Gem) or a customized error code as a symbol
+  #
+  # @return [String] Human-readable error text in markdown format for posting
+  #
   def error_text(error)
-    { ping_command_missing_argument: "*Argument Missing: * `/ping` requires a URI (eg. `/ping example.com`)",
-      monitor_command_missing_uri: "*Argument Missing: * `/monitor` requires a web address (eg. `/monitor example.com 10`)",
-      monitor_command_email_disallowed: "*Argument Invalid: * Email addresses are not available for `/monitor`ing at this time.  Sorry!"
-    }[error]
+    case error
+    when StandardError
+      ERROR_TEXT[error.class]
+    else
+      ERROR_TEXT[error]
+    end
   end
 
   #
@@ -176,22 +199,6 @@ module MessageHelpers
         alt_text: "#{target} is inconclusive for some reason...",
         color: "#b0b0a6"
       }
-    end
-  end
-
-  #
-  # Returns a human-readable error message that will be printed on Slack and logged by the bot
-  #
-  # @param [PingityError] error The error raised by the Pingity Gem
-  #
-  # @return [String] Human-readable error message
-  #
-  def gem_error_message(error)
-    case error
-    when Pingity::CredentialsError
-      "PingityBot's credentials were rejected by #{ENV['PINGITY_API_BASE']}.  Ensure PingityBot's .env file contains a PINGITY_ID and PINGITY_SECRET that match your Pingity API Key's ID and Secret."
-    else
-      "Unknown error type: #{error.to_s}"
     end
   end
 

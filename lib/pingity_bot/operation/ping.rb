@@ -16,7 +16,11 @@ class PingityBot::Operation::Ping < PingityBot::Operation
   state(:ping_reporting_on_uri) do
     @report = self.report_on_uri(@uri)
 
-    change_to_state!(:ping_sending_final_notification)
+    if @report == :failure
+      delete_last_message!
+    else
+      change_to_state!(:ping_sending_final_notification)
+    end
   end
 
   state(:ping_sending_final_notification) do
