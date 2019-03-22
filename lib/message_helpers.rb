@@ -2,7 +2,8 @@ module MessageHelpers
 
   # Posts or updates a bot message via Slack's Web API.  Will automatically update rather than post if a timestamp (ts) is included.
   #
-  # @param [String] channel (optional) A specific channel id to post to; defaults to the channel where the request was made
+  # @param [String] team_id (optional) A specific team id to post to; defaults to the team where the request was made
+  # @param [String] channel_id (optional) A specific channel id to post to; defaults to the channel where the request was made
   # @param [Float] ts (Optional) Timestamp of a previous message sent by the bot.  If included and if update: true, the post will replace the existing message at this timestamp rather than the most recent message.
   # @param [Boolean] update (Optional) If provided, the specified message will replace the post with the provided timestamp, :ts, or the most recent message posted, by default.
   # @param [String] text (optional) Simple message.  If a blocks argument is also provided, text will not be printed (but may be displayed on notifications), and should be non-critical.
@@ -36,12 +37,12 @@ module MessageHelpers
 
     if args[:update]
       message.merge!({ ts: args[:ts] || @ts })
-      response = $teams[@team_id]['client'].chat_update(message)
+      response = $teams[args[:team_id] || @team_id]['client'].chat_update(message)
     elsif args[:ephemeral]
       message.merge!({ user: args[:user_id] || @user_id })
-      response = $teams[@team_id]['client'].chat_postEphemeral(message)
+      response = $teams[args[:team_id] || @team_id]['client'].chat_postEphemeral(message)
     else
-      response = $teams[@team_id]['client'].chat_postMessage(message)
+      response = $teams[args[:team_id] || @team_id]['client'].chat_postMessage(message)
     end
 
     response
@@ -106,11 +107,21 @@ module MessageHelpers
     end
   end
 
-  def send_error(params:, error:)
+  #
+  # Sends a message notification (ephemerally) to the specified or triggering user.  Can update an existing post if required.
+  #
+  # @param [Hash] params If the error is raised before an action is started, sending in :params[team_id], :params[channel_id], :params[user_id] will be necessary to route the message; otherwise, this information can be taken from the action automatically
+  # @param [Symbol] error Error code
+  #
+  # @return [Hash] Slack's response object
+  #
+  def send_error(error:, **args)
     send_message(
-      team_id: params['team_id'],
-      channel_id: params['channel_id'],
-      user: params['user_id'],
+      team_id: args[:params]['team_id'] || @team_id,
+      channel_id: args[:params]['channel_id'] || @channel_id,
+      user_id: args[:params]['user_id'] || @user_id,
+      update: args[:update],
+      ephemeral: true,
       text: "Error: #{error.to_s}",
       blocks: [
         {
