@@ -101,7 +101,7 @@ class PingityBot::Operation::Monitor < PingityBot::Operation
       @monitoring_feed.push(
         monitor_status_attachment(
           color: @latest_report[:decorators][:color],
-          text: "*#{human_readable_time(@latest_report[:timestamp], true)}: NOTICE:* Status of #{@latest_report[:target]} changed from #{current_status} to #{@latest_report[:status]}"
+          text: "*#{human_readable_time(@latest_report[:timestamp], true)}: NOTICE:* Status of #{@latest_report[:target]} changed from #{@current_status} to #{@latest_report[:status]}"
         )
       )
 

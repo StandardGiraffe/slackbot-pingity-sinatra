@@ -12,6 +12,7 @@ class PingityBot::Operation
 
   def self.state(name)
     self.states << name
+
     define_method(:"state_#{name}") do
       instance_eval(&Proc.new)
     end
@@ -31,7 +32,9 @@ class PingityBot::Operation
     @thread = Thread.new do
       while @state = @next_state
         @next_state = nil
-        send(:"state_#{@state}")
+        catch(:change_to_state) do
+          send(:"state_#{@state}")
+        end
       end
 
       @state = :finished
@@ -40,6 +43,7 @@ class PingityBot::Operation
 
   def change_to_state!(state)
     @next_state = state
+    throw :change_to_state
   end
 
   def join
