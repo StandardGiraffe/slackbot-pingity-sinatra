@@ -18,7 +18,7 @@ class PingityBot::Operation::RefreshPing < PingityBot::Operation
   state(:refresh_ping_reporting_on_uri) do
     @report = self.report_on_uri(@uri)
 
-    if @report == :failure
+    if @report[:status] == "ERROR"
       delete_message!(@original_ts)
     else
       change_to_state!(:refresh_ping_sending_final_notification)

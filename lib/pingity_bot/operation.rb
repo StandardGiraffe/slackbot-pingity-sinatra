@@ -21,8 +21,10 @@ class PingityBot::Operation
     @team_id = options[:team_id] || payload['team_id'] || payload.dig("team", "id")
     @user_id = options[:user_id] || payload['user_id']
     @channel_id = options[:channel_id] || payload['channel_id'] || payload.dig("channel", "id")
+
     @uri = options[:uri] || payload.dig("actions", 0, "value")
     @original_ts = options[:original_ts] || payload.dig("message", "ts")
+    @monitoring_period = options[:monitoring_period]
 
     @next_state = self.class.states.first
 
@@ -77,7 +79,13 @@ protected
     puts error_text(e)
     send_error(error: e)
 
-    :failure
+    {
+      raw: nil,
+      status: human_readable_status("error"),
+      target: nil,
+      timestamp: Time.now.to_i,
+      decorators: get_status_decorators(status: "error", target: nil)
+    }
   end
 end
 

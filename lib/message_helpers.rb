@@ -11,6 +11,13 @@ module MessageHelpers
     Pingity::NoStatusCodeGivenError => "*Service Error:* \nNo status code was given in response to this request.  That's weird.  Please let us know immediately!"
   }
 
+  HUMAN_READABLE_STATUS = {
+    "pass" => "PASS",
+    "warning" => "WARNING(S)",
+    "fail_critical" => "FAIL",
+    "error" => "ERROR"
+  }
+
   # Posts or updates a bot message via Slack's Web API.  Will automatically update rather than post if a timestamp (ts) is included.
   #
   # @param [String] team_id (optional) A specific team id to post to; defaults to the team where the request was made
@@ -88,7 +95,7 @@ module MessageHelpers
   #
   # @return [Obj] Response object for the message sent
   #
-  def send_dm(text: nil, blocks: nil, attachments: nil, update: false)
+  def send_dm(**args)
     channel_id = $teams[@team_id]['client'].conversations_open(
       {
         users: args[:user_id] || @user_id,
@@ -111,11 +118,7 @@ module MessageHelpers
 
   # Converts a pingity status code to a human-readable equivalent.
   def human_readable_status(status)
-    {
-      "pass" => "PASS",
-      "warning" => "WARNING(S)",
-      "fail_critical" => "FAIL"
-    }[status]
+    HUMAN_READABLE_STATUS[status]
   end
 
   #
@@ -204,6 +207,12 @@ module MessageHelpers
         url: "https://raw.githubusercontent.com/StandardGiraffe/slackbot-pingity-sinatra/master/bin/badges/pingity-badge-failing.png",
         alt_text: "#{target} is failing",
         color: "#cf4b3f"
+      }
+    when "error"
+      {
+        url: "https://raw.githubusercontent.com/StandardGiraffe/slackbot-pingity-sinatra/feature/command-monitor/bin/badges/pingity-badge-pending.png",
+        alt_text: "An error occurred.",
+        color: "#000000"
       }
     else
       {
