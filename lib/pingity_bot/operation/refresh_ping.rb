@@ -8,8 +8,8 @@ class PingityBot::Operation::RefreshPing < PingityBot::Operation
       ts: @original_ts,
       update: true,
       text: "I'm attempting to ping \"#{@uri}\".\nJust a moment, please...",
-      blocks: pending_blocks(uri: @uri),
-      attachments: pending_attachments(uri: @uri)
+      blocks: pending_blocks,
+      attachments: pending_attachments
     )["ts"]
 
     change_to_state!(:refresh_ping_reporting_on_uri)
@@ -21,6 +21,9 @@ class PingityBot::Operation::RefreshPing < PingityBot::Operation
     if @report[:status] == "ERROR"
       delete_message!(@original_ts)
     else
+      # Update @uri to Pingity-canonized version
+      @uri = @report[:target]
+
       change_to_state!(:refresh_ping_sending_final_notification)
     end
   end
@@ -28,14 +31,9 @@ class PingityBot::Operation::RefreshPing < PingityBot::Operation
   state(:refresh_ping_sending_final_notification) do
     send_message(
       update: true,
-      text: "Pingity tested \"#{@report[:target]}\": #{@report[:status]}",
-      blocks: results_blocks(target: @report[:target]),
-      attachments: results_attachments(
-        target: @report[:target],
-        decorators: @report[:decorators],
-        timestamp: @report[:timestamp],
-        status: @report[:status]
-      )
+      text: "Pingity tested \"#{@uri}\": #{@report[:status]}",
+      blocks: results_blocks,
+      attachments: results_attachments
     )
   end
 end

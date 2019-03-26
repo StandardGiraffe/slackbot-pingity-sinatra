@@ -42,7 +42,13 @@ class PingityBot::Operation::Monitor < PingityBot::Operation
   state(:monitor_building_bulletin_variables) do
     @initial_status = @current_status = @initial_report[:status]
     @previous_status = nil
+
     @status_changes = 0
+    @status_results = {
+      "PASS" => 0,
+      "WARNING(S)" => 0,
+      "FAIL" => 0
+    }
 
     change_to_state!(:monitor_posting_initial_feed_bulletin)
   end
@@ -55,6 +61,7 @@ class PingityBot::Operation::Monitor < PingityBot::Operation
       )
     ]
 
+    increment_results(@initial_report[:status])
     post_monitoring_bulletin!
 
     change_to_state!(:monitor_updating_feed_bulletins)
@@ -110,6 +117,7 @@ class PingityBot::Operation::Monitor < PingityBot::Operation
       @status_changes += 1
     end
 
+    increment_results(@latest_report[:status])
     post_monitoring_bulletin!
 
     sleep 5
@@ -147,5 +155,9 @@ protected
       ts: @ts,
       attachments: @monitoring_feed
     )
+  end
+
+  def increment_results(status)
+    @status_results[status] += 1
   end
 end

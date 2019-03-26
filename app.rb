@@ -49,7 +49,6 @@ class API < Sinatra::Base
   end
 
   post '/command' do
-
     in_background do
       # Token verification is depricated.  Use #verify_signature instead if possible.
       # verify_token(params['token'])

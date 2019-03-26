@@ -1,17 +1,17 @@
 module PingHelpers
-  def pending_blocks(uri:)
+  def pending_blocks
     [
       {
         "type": "section",
         "text": {
           "type": "mrkdwn",
-          "text": "*<https://pingity.com|Pingity> is trying to test \"#{uri}\"...*"
+          "text": "*<https://pingity.com|Pingity> is trying to test \"#{@uri}\"...*"
         }
       }
     ]
   end
 
-  def pending_attachments(uri:)
+  def pending_attachments
     [
       {
         "color": "#6495ed",
@@ -25,7 +25,7 @@ module PingHelpers
             "accessory": {
               "type": "image",
               "image_url": "https://raw.githubusercontent.com/StandardGiraffe/slackbot-pingity-sinatra/master/bin/badges/pingity-badge-pending.png",
-              "alt_text": "#{uri} is being tested..."
+              "alt_text": "#{@uri} is being tested..."
             }
           },
           {
@@ -48,33 +48,33 @@ module PingHelpers
     ]
   end
 
-  def results_blocks(target:)
+  def results_blocks
     [
       {
         "type": "section",
         "text": {
           "type": "mrkdwn",
-          "text": "*<https://pingity.com|Pingity> results for #{target}: *"
+          "text": "*<https://pingity.com|Pingity> results for #{@uri}: *"
         }
       }
     ]
   end
 
-  def results_attachments(target:, decorators:, timestamp:, status:)
+  def results_attachments
     [
       {
-        "color": decorators[:color],
+        "color": @report[:decorators][:color],
         "blocks": [
           {
             "type": "section",
             "text": {
               "type": "mrkdwn",
-              "text": "*Overall Status:*\n#{status}\n*Current as of:*\n#{human_readable_time(timestamp)}"
+              "text": "*Overall Status:*\n#{@report[:status]}\n*Current as of:*\n#{human_readable_time(@report[:timestamp])}"
             },
             "accessory": {
               "type": "image",
-              "image_url": decorators[:url],
-              "alt_text": decorators[:alt_text]
+              "image_url": @report[:decorators][:url],
+              "alt_text": @report[:decorators][:alt_text]
             }
           },
           {
@@ -87,7 +87,7 @@ module PingHelpers
                   "emoji": true,
                   "text": "Details on Pingity.com"
                 },
-                "url": "#{ENV['PINGITY_API_BASE']}?target=#{target}",
+                "url": "#{ENV['PINGITY_API_BASE']}?target=#{@uri}",
                 "action_id": "redirect_to_pingity"
               },
               {
@@ -97,7 +97,7 @@ module PingHelpers
                   "emoji": true,
                   "text": "Refresh Result"
                 },
-                "value": target,
+                "value": @uri,
                 "action_id": "refresh_result"
               }
             ]

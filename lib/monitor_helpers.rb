@@ -39,19 +39,24 @@ module MonitorHelpers
   end
 
   def monitor_conclusion_content
+    total_pings = @status_results.values.sum
+    passes = @status_results["PASS"]
+    warnings = @status_results["WARNING(S)"]
+    fail_criticals = @status_results["FAIL"]
+
     text = @errored_out ? "*Warning: <https://pingity.com|Pingity> resource monitoring for #{@uri} ended with an error.*".upcase : "*<https://pingity.com|Pingity> resource monitoring for #{@uri} has finished:*"
 
     color = if @errored_out
       "#000000"
     else
-      @status_changes ? "#6495ed" : "#faaf42"
+      @status_changes > 0 ? "#faaf42" : "#6495ed"
     end
 
-    conclusion_text = if @status_changes > 0
-      "*Status changed #{@status_changes} #{"time".pluralize(@status_changes)} during the monitoring period* \n\n*Initial Status:* #{@initial_report[:status]}\n*Final Status:* #{@latest_report[:status]}\n\nPlease see the above log for details."
-    else
-      "*Status did not change during the monitoring period*\n\n*Initial Status:* #{@initial_report[:status]}\n*Final Status:* #{@latest_report[:status]}"
-    end
+    overall_report_message = @status_changes > 0 ? "*Status changed #{@status_changes} #{"time".pluralize(@status_changes)} during the monitoring period*" : "*Status did not change during the monitoring period*"
+    start_and_finish_statistics = "*Initial Status:* #{@initial_report[:status]}\n*Final Status:* #{@latest_report[:status]}"
+    results_statistics = "*Results Statistics (Status / Total Pings):* \n*PASS:* #{passes} / #{total_pings}   (#{status_percentage(passes)}%)\n*WARNING(S):* #{warnings} / #{total_pings}   (#{status_percentage(warnings)}%)\n*FAIL:* #{fail_criticals} / #{total_pings}   (#{status_percentage(fail_criticals)}%)"
+
+    conclusion_text = "#{overall_report_message}\n\n#{start_and_finish_statistics}\n\n#{results_statistics}"
 
     {
       text: text,
@@ -77,6 +82,10 @@ module MonitorHelpers
         }
       ]
     }
+  end
+
+  def status_percentage(results_for_given_status)
+    ((results_for_given_status.to_f / @status_results.values.sum.to_f) * 10000).round / 100.0
   end
 
   extend self

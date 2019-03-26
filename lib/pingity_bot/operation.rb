@@ -41,6 +41,7 @@ class PingityBot::Operation
     end
   end
 
+  # Changing the state will end the current state via throw / catch
   def change_to_state!(state)
     @next_state = state
     throw :change_to_state
