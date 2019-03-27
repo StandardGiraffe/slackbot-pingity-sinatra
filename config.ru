@@ -1,3 +1,5 @@
+require 'bundler/setup'
+
 require './auth'
 require './app'
 

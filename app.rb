@@ -1,5 +1,3 @@
-require 'bundler/setup'
-
 require 'sinatra/base'
 require 'thin'
 require 'slack-ruby-client'

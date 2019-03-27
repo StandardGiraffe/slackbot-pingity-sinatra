@@ -1,0 +1,743 @@
+# Logfile created on 2019-03-27 15:09:12 -0400 by logger.rb/66358
+  INFO ---------------------------------------------------------------------------
+  INFO START 2019-03-27 15:09:12 -0400 cap vagrant
+  INFO ---------------------------------------------------------------------------
+  INFO ---------------------------------------------------------------------------
+  INFO START 2019-03-27 15:09:15 -0400 cap vagrant deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [7d63e414] Running /usr/bin/env mkdir -p /tmp on pingitybot-vagrant
+ DEBUG [7d63e414] Command: /usr/bin/env mkdir -p /tmp
+  INFO [6f6bbb88] Finished in 0.543 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-pingitybot-vagrant-danny.sh 0.0%
+  INFO Uploading /tmp/git-ssh-pingitybot-vagrant-danny.sh 100.0%
+  INFO [41e89fbb] Running /usr/bin/env chmod 700 /tmp/git-ssh-pingitybot-vagrant-danny.sh on pingitybot-vagrant
+ DEBUG [41e89fbb] Command: /usr/bin/env chmod 700 /tmp/git-ssh-pingitybot-vagrant-danny.sh
+  INFO [838cf0bb] Finished in 0.058 seconds with exit status 0 (successful).
+  INFO [434b32ed] Running /usr/bin/env git ls-remote git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git HEAD on pingitybot-vagrant
+ DEBUG [434b32ed] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git ls-remote git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git HEAD )
+ DEBUG [722712f2] 	Warning: Permanently added 'github.com,192.30.253.112' (RSA) to the list of known hosts.
+ DEBUG [722712f2] 	a16fa34ef128c09c2f98f55117f9f03bb7e87ec9	HEAD
+  INFO [722712f2] Finished in 0.904 seconds with exit status 0 (successful).
+  INFO [82f79780] Running /usr/bin/env mkdir -p /app/pingitybot/shared /app/pingitybot/releases on pingitybot-vagrant
+ DEBUG [82f79780] Command: /usr/bin/env mkdir -p /app/pingitybot/shared /app/pingitybot/releases
+ DEBUG [9326709b] 	mkdir: cannot create directory ‘/app/pingitybot’: Permission denied
+mkdir: cannot create directory ‘/app/pingitybot’: Permission denied
+  INFO ---------------------------------------------------------------------------
+  INFO START 2019-03-27 15:10:50 -0400 cap vagrant deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [ae588634] Running /usr/bin/env mkdir -p /tmp on pingitybot-vagrant
+ DEBUG [ae588634] Command: /usr/bin/env mkdir -p /tmp
+  INFO [f42a1134] Finished in 0.539 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-pingitybot-vagrant-danny.sh 0.0%
+  INFO Uploading /tmp/git-ssh-pingitybot-vagrant-danny.sh 100.0%
+  INFO [388ae669] Running /usr/bin/env chmod 700 /tmp/git-ssh-pingitybot-vagrant-danny.sh on pingitybot-vagrant
+ DEBUG [388ae669] Command: /usr/bin/env chmod 700 /tmp/git-ssh-pingitybot-vagrant-danny.sh
+  INFO [6d19fd10] Finished in 0.060 seconds with exit status 0 (successful).
+  INFO [da74792d] Running /usr/bin/env git ls-remote git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git HEAD on pingitybot-vagrant
+ DEBUG [da74792d] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git ls-remote git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git HEAD )
+ DEBUG [518751c0] 	a16fa34ef128c09c2f98f55117f9f03bb7e87ec9	HEAD
+  INFO [518751c0] Finished in 1.358 seconds with exit status 0 (successful).
+  INFO [40bcba63] Running /usr/bin/env mkdir -p /app/pingitybot/shared /app/pingitybot/releases on pingitybot-vagrant
+ DEBUG [40bcba63] Command: /usr/bin/env mkdir -p /app/pingitybot/shared /app/pingitybot/releases
+  INFO [c9fa7667] Finished in 0.062 seconds with exit status 0 (successful).
+ DEBUG [96ba88a6] Running [ -f /app/pingitybot/current/REVISION ] on pingitybot-vagrant
+ DEBUG [96ba88a6] Command: [ -f /app/pingitybot/current/REVISION ]
+ DEBUG [bdc0a47f] Finished in 0.056 seconds with exit status 1 (failed).
+ DEBUG [9b4216a4] Running [ -f /app/pingitybot/repo/HEAD ] on pingitybot-vagrant
+ DEBUG [9b4216a4] Command: [ -f /app/pingitybot/repo/HEAD ]
+ DEBUG [8bc9b501] Finished in 0.048 seconds with exit status 1 (failed).
+ DEBUG [8bb6592f] Running if test ! -d /app/pingitybot; then echo "Directory does not exist '/app/pingitybot'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [8bb6592f] Command: if test ! -d /app/pingitybot; then echo "Directory does not exist '/app/pingitybot'" 1>&2; false; fi
+ DEBUG [a76fd8f9] Finished in 0.059 seconds with exit status 0 (successful).
+  INFO [50dcc689] Running /usr/bin/env git clone --mirror git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git /app/pingitybot/repo on pingitybot-vagrant
+ DEBUG [50dcc689] Command: cd /app/pingitybot && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git clone --mirror git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git /app/pingitybot/repo )
+ DEBUG [9036e163] 	Cloning into bare repository '/app/pingitybot/repo'...
+ DEBUG [9036e163] 	Warning: Permanently added the RSA host key for IP address '192.30.253.113' to the list of known hosts.
+  INFO [9036e163] Finished in 1.165 seconds with exit status 0 (successful).
+ DEBUG [11d6dc16] Running if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [11d6dc16] Command: if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi
+ DEBUG [2620feb0] Finished in 0.052 seconds with exit status 0 (successful).
+  INFO [a2523adb] Running /usr/bin/env git remote set-url origin git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git on pingitybot-vagrant
+ DEBUG [a2523adb] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git remote set-url origin git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git )
+  INFO [81eb459d] Finished in 0.055 seconds with exit status 0 (successful).
+  INFO [47b31543] Running /usr/bin/env git remote update --prune on pingitybot-vagrant
+ DEBUG [47b31543] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [75d17caa] 	Fetching origin
+  INFO [75d17caa] Finished in 0.889 seconds with exit status 0 (successful).
+ DEBUG [23eab217] Running if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [23eab217] Command: if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi
+ DEBUG [f12e1804] Finished in 0.056 seconds with exit status 0 (successful).
+  INFO [aa2171c2] Running /usr/bin/env mkdir -p /app/pingitybot/releases/20190327191052 on pingitybot-vagrant
+ DEBUG [aa2171c2] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env mkdir -p /app/pingitybot/releases/20190327191052 )
+  INFO [030a8aba] Finished in 0.061 seconds with exit status 0 (successful).
+  INFO [64c35ed8] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /app/pingitybot/releases/20190327191052 on pingitybot-vagrant
+ DEBUG [64c35ed8] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /app/pingitybot/releases/20190327191052 )
+  INFO [92265329] Finished in 0.064 seconds with exit status 0 (successful).
+ DEBUG [ef137b84] Running if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [ef137b84] Command: if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi
+ DEBUG [df8cfd1f] Finished in 0.053 seconds with exit status 0 (successful).
+ DEBUG [2b930fd2] Running /usr/bin/env git rev-list --max-count=1 master on pingitybot-vagrant
+ DEBUG [2b930fd2] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [ecf3df39] 	a16fa34ef128c09c2f98f55117f9f03bb7e87ec9
+ DEBUG [ecf3df39] Finished in 0.064 seconds with exit status 0 (successful).
+ DEBUG [60fa4b5c] Running if test ! -d /app/pingitybot/releases/20190327191052; then echo "Directory does not exist '/app/pingitybot/releases/20190327191052'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [60fa4b5c] Command: if test ! -d /app/pingitybot/releases/20190327191052; then echo "Directory does not exist '/app/pingitybot/releases/20190327191052'" 1>&2; false; fi
+ DEBUG [849b019f] Finished in 0.054 seconds with exit status 0 (successful).
+  INFO [ba202d49] Running /usr/bin/env echo "a16fa34ef128c09c2f98f55117f9f03bb7e87ec9" > REVISION on pingitybot-vagrant
+ DEBUG [ba202d49] Command: cd /app/pingitybot/releases/20190327191052 && /usr/bin/env echo "a16fa34ef128c09c2f98f55117f9f03bb7e87ec9" > REVISION
+  INFO [eb5bf61e] Finished in 0.065 seconds with exit status 0 (successful).
+ DEBUG [69bbd461] Running if test ! -d /app/pingitybot/releases/20190327191052; then echo "Directory does not exist '/app/pingitybot/releases/20190327191052'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [69bbd461] Command: if test ! -d /app/pingitybot/releases/20190327191052; then echo "Directory does not exist '/app/pingitybot/releases/20190327191052'" 1>&2; false; fi
+ DEBUG [e0cd5586] Finished in 0.058 seconds with exit status 0 (successful).
+ DEBUG [65e89839] Running /usr/bin/env bundle check --path /app/pingitybot/shared/bundle on pingitybot-vagrant
+ DEBUG [65e89839] Command: cd /app/pingitybot/releases/20190327191052 && /usr/bin/env bundle check --path /app/pingitybot/shared/bundle
+ DEBUG [64d1ad0d] 	/usr/bin/env: ‘bundle’: No such file or directory
+ DEBUG [64d1ad0d] Finished in 0.044 seconds with exit status 127 (failed).
+  INFO [8d8169dd] Running /usr/bin/env bundle install --path /app/pingitybot/shared/bundle --jobs 4 --without development test --deployment --quiet on pingitybot-vagrant
+ DEBUG [8d8169dd] Command: cd /app/pingitybot/releases/20190327191052 && /usr/bin/env bundle install --path /app/pingitybot/shared/bundle --jobs 4 --without development test --deployment --quiet
+ DEBUG [ebb84464] 	/usr/bin/env: ‘bundle’: No such file or directory
+  INFO ---------------------------------------------------------------------------
+  INFO START 2019-03-27 15:13:49 -0400 cap vagrant deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [e4c44339] Running /usr/bin/env mkdir -p /tmp on pingitybot-vagrant
+ DEBUG [e4c44339] Command: /usr/bin/env mkdir -p /tmp
+  INFO [a446aa60] Finished in 0.536 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-pingitybot-vagrant-danny.sh 0.0%
+  INFO Uploading /tmp/git-ssh-pingitybot-vagrant-danny.sh 100.0%
+  INFO [88c2ca84] Running /usr/bin/env chmod 700 /tmp/git-ssh-pingitybot-vagrant-danny.sh on pingitybot-vagrant
+ DEBUG [88c2ca84] Command: /usr/bin/env chmod 700 /tmp/git-ssh-pingitybot-vagrant-danny.sh
+  INFO [aba1afb4] Finished in 0.058 seconds with exit status 0 (successful).
+  INFO [4e5c5360] Running /usr/bin/env git ls-remote git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git HEAD on pingitybot-vagrant
+ DEBUG [4e5c5360] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git ls-remote git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git HEAD )
+ DEBUG [36c23567] 	a16fa34ef128c09c2f98f55117f9f03bb7e87ec9	HEAD
+  INFO [36c23567] Finished in 0.893 seconds with exit status 0 (successful).
+  INFO [ece2e1c8] Running /usr/bin/env mkdir -p /app/pingitybot/shared /app/pingitybot/releases on pingitybot-vagrant
+ DEBUG [ece2e1c8] Command: /usr/bin/env mkdir -p /app/pingitybot/shared /app/pingitybot/releases
+  INFO [5839833a] Finished in 0.054 seconds with exit status 0 (successful).
+ DEBUG [1ad52be6] Running [ -f /app/pingitybot/current/REVISION ] on pingitybot-vagrant
+ DEBUG [1ad52be6] Command: [ -f /app/pingitybot/current/REVISION ]
+ DEBUG [dee8aac2] Finished in 0.046 seconds with exit status 1 (failed).
+ DEBUG [46797b21] Running [ -f /app/pingitybot/repo/HEAD ] on pingitybot-vagrant
+ DEBUG [46797b21] Command: [ -f /app/pingitybot/repo/HEAD ]
+ DEBUG [e8dca7a0] Finished in 0.047 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /app/pingitybot/repo
+ DEBUG [e4df17b7] Running if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [e4df17b7] Command: if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi
+ DEBUG [d84f8286] Finished in 0.054 seconds with exit status 0 (successful).
+  INFO [efebe61a] Running /usr/bin/env git remote set-url origin git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git on pingitybot-vagrant
+ DEBUG [efebe61a] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git remote set-url origin git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git )
+  INFO [cbfe00ca] Finished in 0.066 seconds with exit status 0 (successful).
+  INFO [27128727] Running /usr/bin/env git remote update --prune on pingitybot-vagrant
+ DEBUG [27128727] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [a836bbc6] 	Fetching origin
+  INFO [a836bbc6] Finished in 0.930 seconds with exit status 0 (successful).
+ DEBUG [0548d40a] Running if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [0548d40a] Command: if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi
+ DEBUG [19003a68] Finished in 0.056 seconds with exit status 0 (successful).
+  INFO [b5d1aa94] Running /usr/bin/env mkdir -p /app/pingitybot/releases/20190327191351 on pingitybot-vagrant
+ DEBUG [b5d1aa94] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env mkdir -p /app/pingitybot/releases/20190327191351 )
+  INFO [567e8742] Finished in 0.061 seconds with exit status 0 (successful).
+  INFO [fe627c64] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /app/pingitybot/releases/20190327191351 on pingitybot-vagrant
+ DEBUG [fe627c64] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /app/pingitybot/releases/20190327191351 )
+  INFO [775b6a00] Finished in 0.069 seconds with exit status 0 (successful).
+ DEBUG [99605596] Running if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [99605596] Command: if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi
+ DEBUG [18d3baba] Finished in 0.043 seconds with exit status 0 (successful).
+ DEBUG [b03719b2] Running /usr/bin/env git rev-list --max-count=1 master on pingitybot-vagrant
+ DEBUG [b03719b2] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [7f439f59] 	a16fa34ef128c09c2f98f55117f9f03bb7e87ec9
+ DEBUG [7f439f59] Finished in 0.056 seconds with exit status 0 (successful).
+ DEBUG [583f898b] Running if test ! -d /app/pingitybot/releases/20190327191351; then echo "Directory does not exist '/app/pingitybot/releases/20190327191351'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [583f898b] Command: if test ! -d /app/pingitybot/releases/20190327191351; then echo "Directory does not exist '/app/pingitybot/releases/20190327191351'" 1>&2; false; fi
+ DEBUG [8b34007d] Finished in 0.048 seconds with exit status 0 (successful).
+  INFO [dcff07af] Running /usr/bin/env echo "a16fa34ef128c09c2f98f55117f9f03bb7e87ec9" > REVISION on pingitybot-vagrant
+ DEBUG [dcff07af] Command: cd /app/pingitybot/releases/20190327191351 && /usr/bin/env echo "a16fa34ef128c09c2f98f55117f9f03bb7e87ec9" > REVISION
+  INFO [ec8bbb5b] Finished in 0.049 seconds with exit status 0 (successful).
+ DEBUG [5e80e074] Running if test ! -d /app/pingitybot/releases/20190327191351; then echo "Directory does not exist '/app/pingitybot/releases/20190327191351'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [5e80e074] Command: if test ! -d /app/pingitybot/releases/20190327191351; then echo "Directory does not exist '/app/pingitybot/releases/20190327191351'" 1>&2; false; fi
+ DEBUG [79f4949a] Finished in 0.046 seconds with exit status 0 (successful).
+ DEBUG [c99822df] Running /usr/bin/env bundle check --path /app/pingitybot/shared/bundle on pingitybot-vagrant
+ DEBUG [c99822df] Command: cd /app/pingitybot/releases/20190327191351 && /usr/bin/env bundle check --path /app/pingitybot/shared/bundle
+ DEBUG [69be8297] 	/usr/bin/env: ‘bundle’: No such file or directory
+ DEBUG [69be8297] Finished in 0.049 seconds with exit status 127 (failed).
+  INFO [b238990d] Running /usr/bin/env bundle install --path /app/pingitybot/shared/bundle --jobs 4 --without development test --deployment --quiet on pingitybot-vagrant
+ DEBUG [b238990d] Command: cd /app/pingitybot/releases/20190327191351 && /usr/bin/env bundle install --path /app/pingitybot/shared/bundle --jobs 4 --without development test --deployment --quiet
+ DEBUG [d6ee5cb7] 	/usr/bin/env: ‘bundle’: No such file or directory
+  INFO ---------------------------------------------------------------------------
+  INFO START 2019-03-27 15:21:29 -0400 cap vagrant deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [eb8e3841] Running /usr/bin/env mkdir -p /tmp on pingitybot-vagrant
+ DEBUG [eb8e3841] Command: /usr/bin/env mkdir -p /tmp
+  INFO [d96cc634] Finished in 0.586 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-pingitybot-vagrant-danny.sh 0.0%
+  INFO Uploading /tmp/git-ssh-pingitybot-vagrant-danny.sh 100.0%
+  INFO [a1d53477] Running /usr/bin/env chmod 700 /tmp/git-ssh-pingitybot-vagrant-danny.sh on pingitybot-vagrant
+ DEBUG [a1d53477] Command: /usr/bin/env chmod 700 /tmp/git-ssh-pingitybot-vagrant-danny.sh
+  INFO [c5e1b78f] Finished in 0.063 seconds with exit status 0 (successful).
+  INFO [9d49a919] Running /usr/bin/env git ls-remote git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git HEAD on pingitybot-vagrant
+ DEBUG [9d49a919] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git ls-remote git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git HEAD )
+ DEBUG [9a3a5263] 	a16fa34ef128c09c2f98f55117f9f03bb7e87ec9	HEAD
+  INFO [9a3a5263] Finished in 0.941 seconds with exit status 0 (successful).
+  INFO [4efa46ae] Running /usr/bin/env mkdir -p /app/pingitybot/shared /app/pingitybot/releases on pingitybot-vagrant
+ DEBUG [4efa46ae] Command: /usr/bin/env mkdir -p /app/pingitybot/shared /app/pingitybot/releases
+  INFO [d72e1570] Finished in 0.060 seconds with exit status 0 (successful).
+ DEBUG [917b43fc] Running [ -f /app/pingitybot/current/REVISION ] on pingitybot-vagrant
+ DEBUG [917b43fc] Command: [ -f /app/pingitybot/current/REVISION ]
+ DEBUG [d6f3e055] Finished in 0.053 seconds with exit status 1 (failed).
+ DEBUG [e7f00868] Running [ -f /app/pingitybot/repo/HEAD ] on pingitybot-vagrant
+ DEBUG [e7f00868] Command: [ -f /app/pingitybot/repo/HEAD ]
+ DEBUG [2980db7b] Finished in 0.052 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /app/pingitybot/repo
+ DEBUG [4bc0fa09] Running if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [4bc0fa09] Command: if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi
+ DEBUG [5ea258ef] Finished in 0.041 seconds with exit status 0 (successful).
+  INFO [542f4a9d] Running /usr/bin/env git remote set-url origin git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git on pingitybot-vagrant
+ DEBUG [542f4a9d] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git remote set-url origin git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git )
+  INFO [dea3a73f] Finished in 0.064 seconds with exit status 0 (successful).
+  INFO [ade7c9b4] Running /usr/bin/env git remote update --prune on pingitybot-vagrant
+ DEBUG [ade7c9b4] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [1572e045] 	Fetching origin
+  INFO [1572e045] Finished in 0.919 seconds with exit status 0 (successful).
+ DEBUG [0b96ea23] Running if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [0b96ea23] Command: if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi
+ DEBUG [d111723f] Finished in 0.062 seconds with exit status 0 (successful).
+  INFO [96f70a2d] Running /usr/bin/env mkdir -p /app/pingitybot/releases/20190327192131 on pingitybot-vagrant
+ DEBUG [96f70a2d] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env mkdir -p /app/pingitybot/releases/20190327192131 )
+  INFO [0ae5a162] Finished in 0.063 seconds with exit status 0 (successful).
+  INFO [98ed0a40] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /app/pingitybot/releases/20190327192131 on pingitybot-vagrant
+ DEBUG [98ed0a40] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /app/pingitybot/releases/20190327192131 )
+  INFO [f1652ca1] Finished in 0.072 seconds with exit status 0 (successful).
+ DEBUG [eb9c7830] Running if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [eb9c7830] Command: if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi
+ DEBUG [3772252f] Finished in 0.046 seconds with exit status 0 (successful).
+ DEBUG [3370236d] Running /usr/bin/env git rev-list --max-count=1 master on pingitybot-vagrant
+ DEBUG [3370236d] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [434d5121] 	a16fa34ef128c09c2f98f55117f9f03bb7e87ec9
+ DEBUG [434d5121] Finished in 0.064 seconds with exit status 0 (successful).
+ DEBUG [f6bf9759] Running if test ! -d /app/pingitybot/releases/20190327192131; then echo "Directory does not exist '/app/pingitybot/releases/20190327192131'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [f6bf9759] Command: if test ! -d /app/pingitybot/releases/20190327192131; then echo "Directory does not exist '/app/pingitybot/releases/20190327192131'" 1>&2; false; fi
+ DEBUG [6dd6b906] Finished in 0.044 seconds with exit status 0 (successful).
+  INFO [bfcc5988] Running /usr/bin/env echo "a16fa34ef128c09c2f98f55117f9f03bb7e87ec9" > REVISION on pingitybot-vagrant
+ DEBUG [bfcc5988] Command: cd /app/pingitybot/releases/20190327192131 && /usr/bin/env echo "a16fa34ef128c09c2f98f55117f9f03bb7e87ec9" > REVISION
+  INFO [ff86c24c] Finished in 0.046 seconds with exit status 0 (successful).
+ DEBUG [359e09fd] Running if test ! -d /app/pingitybot/releases/20190327192131; then echo "Directory does not exist '/app/pingitybot/releases/20190327192131'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [359e09fd] Command: if test ! -d /app/pingitybot/releases/20190327192131; then echo "Directory does not exist '/app/pingitybot/releases/20190327192131'" 1>&2; false; fi
+ DEBUG [334cd48b] Finished in 0.045 seconds with exit status 0 (successful).
+ DEBUG [c82e4b00] Running /usr/bin/env bundle check --path /app/pingitybot/shared/bundle on pingitybot-vagrant
+ DEBUG [c82e4b00] Command: cd /app/pingitybot/releases/20190327192131 && /usr/bin/env bundle check --path /app/pingitybot/shared/bundle
+ DEBUG [54642f1f] 	You must use Bundler 2 or greater with this lockfile.
+ DEBUG [54642f1f] Finished in 0.258 seconds with exit status 20 (failed).
+  INFO [e0420247] Running /usr/bin/env bundle install --path /app/pingitybot/shared/bundle --jobs 4 --without development test --deployment --quiet on pingitybot-vagrant
+ DEBUG [e0420247] Command: cd /app/pingitybot/releases/20190327192131 && /usr/bin/env bundle install --path /app/pingitybot/shared/bundle --jobs 4 --without development test --deployment --quiet
+ DEBUG [2ee7e0bb] 	You must use Bundler 2 or greater with this lockfile.
+  INFO ---------------------------------------------------------------------------
+  INFO START 2019-03-27 15:24:10 -0400 cap vagrant deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [31fe6b5c] Running /usr/bin/env mkdir -p /tmp on pingitybot-vagrant
+ DEBUG [31fe6b5c] Command: /usr/bin/env mkdir -p /tmp
+  INFO [82f8d593] Finished in 0.552 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-pingitybot-vagrant-danny.sh 0.0%
+  INFO Uploading /tmp/git-ssh-pingitybot-vagrant-danny.sh 100.0%
+  INFO [0cfcc00c] Running /usr/bin/env chmod 700 /tmp/git-ssh-pingitybot-vagrant-danny.sh on pingitybot-vagrant
+ DEBUG [0cfcc00c] Command: /usr/bin/env chmod 700 /tmp/git-ssh-pingitybot-vagrant-danny.sh
+  INFO [06b02354] Finished in 0.064 seconds with exit status 0 (successful).
+  INFO [e398e6d0] Running /usr/bin/env git ls-remote git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git HEAD on pingitybot-vagrant
+ DEBUG [e398e6d0] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git ls-remote git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git HEAD )
+ DEBUG [9cd3ffda] 	a16fa34ef128c09c2f98f55117f9f03bb7e87ec9	HEAD
+  INFO [9cd3ffda] Finished in 0.906 seconds with exit status 0 (successful).
+  INFO [8d052b5f] Running /usr/bin/env mkdir -p /app/pingitybot/shared /app/pingitybot/releases on pingitybot-vagrant
+ DEBUG [8d052b5f] Command: /usr/bin/env mkdir -p /app/pingitybot/shared /app/pingitybot/releases
+  INFO [17fa8241] Finished in 0.057 seconds with exit status 0 (successful).
+ DEBUG [5c13fd46] Running [ -f /app/pingitybot/current/REVISION ] on pingitybot-vagrant
+ DEBUG [5c13fd46] Command: [ -f /app/pingitybot/current/REVISION ]
+ DEBUG [79fe127a] Finished in 0.052 seconds with exit status 1 (failed).
+ DEBUG [63ea5c08] Running [ -f /app/pingitybot/repo/HEAD ] on pingitybot-vagrant
+ DEBUG [63ea5c08] Command: [ -f /app/pingitybot/repo/HEAD ]
+ DEBUG [c4f97ee7] Finished in 0.056 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /app/pingitybot/repo
+ DEBUG [a26e64e4] Running if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [a26e64e4] Command: if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi
+ DEBUG [26af4d8c] Finished in 0.044 seconds with exit status 0 (successful).
+  INFO [3a1bb07a] Running /usr/bin/env git remote set-url origin git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git on pingitybot-vagrant
+ DEBUG [3a1bb07a] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git remote set-url origin git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git )
+  INFO [dc1eed7e] Finished in 0.050 seconds with exit status 0 (successful).
+  INFO [b7206add] Running /usr/bin/env git remote update --prune on pingitybot-vagrant
+ DEBUG [b7206add] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [4bec2c9f] 	Fetching origin
+  INFO [4bec2c9f] Finished in 0.883 seconds with exit status 0 (successful).
+ DEBUG [500e8b7a] Running if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [500e8b7a] Command: if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi
+ DEBUG [c11b2188] Finished in 0.053 seconds with exit status 0 (successful).
+  INFO [c7f6242d] Running /usr/bin/env mkdir -p /app/pingitybot/releases/20190327192412 on pingitybot-vagrant
+ DEBUG [c7f6242d] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env mkdir -p /app/pingitybot/releases/20190327192412 )
+  INFO [b971d06c] Finished in 0.055 seconds with exit status 0 (successful).
+  INFO [965e5303] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /app/pingitybot/releases/20190327192412 on pingitybot-vagrant
+ DEBUG [965e5303] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /app/pingitybot/releases/20190327192412 )
+  INFO [6a0a3624] Finished in 0.073 seconds with exit status 0 (successful).
+ DEBUG [256b1ad8] Running if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [256b1ad8] Command: if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi
+ DEBUG [cb2ef580] Finished in 0.050 seconds with exit status 0 (successful).
+ DEBUG [c18c50b1] Running /usr/bin/env git rev-list --max-count=1 master on pingitybot-vagrant
+ DEBUG [c18c50b1] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [6e8b0923] 	a16fa34ef128c09c2f98f55117f9f03bb7e87ec9
+ DEBUG [6e8b0923] Finished in 0.069 seconds with exit status 0 (successful).
+ DEBUG [4d0af8b0] Running if test ! -d /app/pingitybot/releases/20190327192412; then echo "Directory does not exist '/app/pingitybot/releases/20190327192412'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [4d0af8b0] Command: if test ! -d /app/pingitybot/releases/20190327192412; then echo "Directory does not exist '/app/pingitybot/releases/20190327192412'" 1>&2; false; fi
+ DEBUG [f21987e3] Finished in 0.041 seconds with exit status 0 (successful).
+  INFO [024e55b3] Running /usr/bin/env echo "a16fa34ef128c09c2f98f55117f9f03bb7e87ec9" > REVISION on pingitybot-vagrant
+ DEBUG [024e55b3] Command: cd /app/pingitybot/releases/20190327192412 && /usr/bin/env echo "a16fa34ef128c09c2f98f55117f9f03bb7e87ec9" > REVISION
+  INFO [f31dcbac] Finished in 0.059 seconds with exit status 0 (successful).
+ DEBUG [1807f749] Running if test ! -d /app/pingitybot/releases/20190327192412; then echo "Directory does not exist '/app/pingitybot/releases/20190327192412'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [1807f749] Command: if test ! -d /app/pingitybot/releases/20190327192412; then echo "Directory does not exist '/app/pingitybot/releases/20190327192412'" 1>&2; false; fi
+ DEBUG [4bdef0bd] Finished in 0.056 seconds with exit status 0 (successful).
+ DEBUG [d5731d29] Running /usr/bin/env bundle check --path /app/pingitybot/shared/bundle on pingitybot-vagrant
+ DEBUG [d5731d29] Command: cd /app/pingitybot/releases/20190327192412 && /usr/bin/env bundle check --path /app/pingitybot/shared/bundle
+ DEBUG [83bb34c3] 	https://github.com/StandardGiraffe/pingity-gem.git (at master@b5f4534) is not
+yet checked out. Run `bundle install` first.
+ DEBUG [83bb34c3] Finished in 0.274 seconds with exit status 11 (failed).
+  INFO [b214368b] Running /usr/bin/env bundle install --path /app/pingitybot/shared/bundle --jobs 4 --without development test --deployment --quiet on pingitybot-vagrant
+ DEBUG [b214368b] Command: cd /app/pingitybot/releases/20190327192412 && /usr/bin/env bundle install --path /app/pingitybot/shared/bundle --jobs 4 --without development test --deployment --quiet
+ DEBUG [e9ba7fca] 	Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
+
+current directory:
+/app/pingitybot/shared/bundle/ruby/2.5.0/gems/eventmachine-1.2.7/ext
+/usr/bin/ruby2.5 -r ./siteconf20190327-4109-m9mpa2.rb extconf.rb
+mkmf.rb can't find header files for ruby at /usr/lib/ruby/include/ruby.h
+
+extconf failed, exit code 1
+
+Gem files will remain installed in
+/app/pingitybot/shared/bundle/ruby/2.5.0/gems/eventmachine-1.2.7 for inspection.
+Results logged to
+/app/pingitybot/shared/bundle/ruby/2.5.0/extensions/x86_64-linux/2.5.0/eventmachine-1.2.7/gem_make.out
+
+An error occurred while installing eventmachine (1.2.7), and Bundler cannot
+continue.
+Make sure that `gem install eventmachine -v '1.2.7' --source
+'https://rubygems.org/'` succeeds before bundling.
+
+In Gemfile:
+  thin was resolved to 1.7.2, which depends on
+    eventmachine
+
+
+Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
+
+current directory:
+/app/pingitybot/shared/bundle/ruby/2.5.0/gems/websocket-driver-0.7.0/ext/websocket-driver
+/usr/bin/ruby2.5 -r ./siteconf20190327-4109-1e8ngcu.rb extconf.rb
+mkmf.rb can't find header files for ruby at /usr/lib/ruby/include/ruby.h
+
+extconf failed, exit code 1
+
+Gem files will remain installed in
+/app/pingitybot/shared/bundle/ruby/2.5.0/gems/websocket-driver-0.7.0 for
+inspection.
+Results logged to
+/app/pingitybot/shared/bundle/ruby/2.5.0/extensions/x86_64-linux/2.5.0/websocket-driver-0.7.0/gem_make.out
+
+An error occurred while installing websocket-driver (0.7.0), and Bundler cannot
+continue.
+Make sure that `gem install websocket-driver -v '0.7.0' --source
+'https://rubygems.org/'` succeeds before bundling.
+
+In Gemfile:
+  slack-ruby-client was resolved to 0.14.1, which depends on
+    websocket-driver
+  INFO ---------------------------------------------------------------------------
+  INFO START 2019-03-27 15:25:52 -0400 cap vagrant deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [c0972ac3] Running /usr/bin/env mkdir -p /tmp on pingitybot-vagrant
+ DEBUG [c0972ac3] Command: /usr/bin/env mkdir -p /tmp
+  INFO [535af006] Finished in 0.703 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-pingitybot-vagrant-danny.sh 0.0%
+  INFO Uploading /tmp/git-ssh-pingitybot-vagrant-danny.sh 100.0%
+  INFO [16d08cb9] Running /usr/bin/env chmod 700 /tmp/git-ssh-pingitybot-vagrant-danny.sh on pingitybot-vagrant
+ DEBUG [16d08cb9] Command: /usr/bin/env chmod 700 /tmp/git-ssh-pingitybot-vagrant-danny.sh
+  INFO [9794dab4] Finished in 0.060 seconds with exit status 0 (successful).
+  INFO [eb9ea6f6] Running /usr/bin/env git ls-remote git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git HEAD on pingitybot-vagrant
+ DEBUG [eb9ea6f6] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git ls-remote git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git HEAD )
+ DEBUG [1fb88a1c] 	a16fa34ef128c09c2f98f55117f9f03bb7e87ec9	HEAD
+  INFO [1fb88a1c] Finished in 0.949 seconds with exit status 0 (successful).
+  INFO [9fd1700e] Running /usr/bin/env mkdir -p /app/pingitybot/shared /app/pingitybot/releases on pingitybot-vagrant
+ DEBUG [9fd1700e] Command: /usr/bin/env mkdir -p /app/pingitybot/shared /app/pingitybot/releases
+  INFO [92fc1a3f] Finished in 0.055 seconds with exit status 0 (successful).
+ DEBUG [a1a29ed7] Running [ -f /app/pingitybot/current/REVISION ] on pingitybot-vagrant
+ DEBUG [a1a29ed7] Command: [ -f /app/pingitybot/current/REVISION ]
+ DEBUG [492384c1] Finished in 0.054 seconds with exit status 1 (failed).
+ DEBUG [88d8a2da] Running [ -f /app/pingitybot/repo/HEAD ] on pingitybot-vagrant
+ DEBUG [88d8a2da] Command: [ -f /app/pingitybot/repo/HEAD ]
+ DEBUG [a6baa48e] Finished in 0.057 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /app/pingitybot/repo
+ DEBUG [878a208a] Running if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [878a208a] Command: if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi
+ DEBUG [76e380f8] Finished in 0.054 seconds with exit status 0 (successful).
+  INFO [78244fb5] Running /usr/bin/env git remote set-url origin git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git on pingitybot-vagrant
+ DEBUG [78244fb5] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git remote set-url origin git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git )
+  INFO [ead4b9ab] Finished in 0.069 seconds with exit status 0 (successful).
+  INFO [b2d41628] Running /usr/bin/env git remote update --prune on pingitybot-vagrant
+ DEBUG [b2d41628] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [99edbad5] 	Fetching origin
+  INFO [99edbad5] Finished in 0.944 seconds with exit status 0 (successful).
+ DEBUG [a5c0e865] Running if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [a5c0e865] Command: if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi
+ DEBUG [015c49b1] Finished in 0.058 seconds with exit status 0 (successful).
+  INFO [9ff876e9] Running /usr/bin/env mkdir -p /app/pingitybot/releases/20190327192554 on pingitybot-vagrant
+ DEBUG [9ff876e9] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env mkdir -p /app/pingitybot/releases/20190327192554 )
+  INFO [9d74fe09] Finished in 0.049 seconds with exit status 0 (successful).
+  INFO [7fb95460] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /app/pingitybot/releases/20190327192554 on pingitybot-vagrant
+ DEBUG [7fb95460] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /app/pingitybot/releases/20190327192554 )
+  INFO [2cf1491c] Finished in 0.049 seconds with exit status 0 (successful).
+ DEBUG [6928afe5] Running if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [6928afe5] Command: if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi
+ DEBUG [611f8c7b] Finished in 0.047 seconds with exit status 0 (successful).
+ DEBUG [6c4a5ce0] Running /usr/bin/env git rev-list --max-count=1 master on pingitybot-vagrant
+ DEBUG [6c4a5ce0] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [0501324b] 	a16fa34ef128c09c2f98f55117f9f03bb7e87ec9
+ DEBUG [0501324b] Finished in 0.065 seconds with exit status 0 (successful).
+ DEBUG [3d7d63bd] Running if test ! -d /app/pingitybot/releases/20190327192554; then echo "Directory does not exist '/app/pingitybot/releases/20190327192554'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [3d7d63bd] Command: if test ! -d /app/pingitybot/releases/20190327192554; then echo "Directory does not exist '/app/pingitybot/releases/20190327192554'" 1>&2; false; fi
+ DEBUG [3f5b5ab5] Finished in 0.054 seconds with exit status 0 (successful).
+  INFO [e1e9df92] Running /usr/bin/env echo "a16fa34ef128c09c2f98f55117f9f03bb7e87ec9" > REVISION on pingitybot-vagrant
+ DEBUG [e1e9df92] Command: cd /app/pingitybot/releases/20190327192554 && /usr/bin/env echo "a16fa34ef128c09c2f98f55117f9f03bb7e87ec9" > REVISION
+  INFO [0953d8d2] Finished in 0.061 seconds with exit status 0 (successful).
+ DEBUG [21b1e2a8] Running if test ! -d /app/pingitybot/releases/20190327192554; then echo "Directory does not exist '/app/pingitybot/releases/20190327192554'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [21b1e2a8] Command: if test ! -d /app/pingitybot/releases/20190327192554; then echo "Directory does not exist '/app/pingitybot/releases/20190327192554'" 1>&2; false; fi
+ DEBUG [d1320874] Finished in 0.053 seconds with exit status 0 (successful).
+ DEBUG [444158df] Running /usr/bin/env bundle check --path /app/pingitybot/shared/bundle on pingitybot-vagrant
+ DEBUG [444158df] Command: cd /app/pingitybot/releases/20190327192554 && /usr/bin/env bundle check --path /app/pingitybot/shared/bundle
+ DEBUG [031033cf] 	The following gems are missing
+ * eventmachine (1.2.7)
+ * websocket-driver (0.7.0)
+ DEBUG [031033cf] 	 * slack-ruby-client (0.14.1)
+ * thin (1.7.2)
+ DEBUG [031033cf] 	Install missing gems with `bundle install`
+ DEBUG [031033cf] Finished in 0.276 seconds with exit status 1 (failed).
+  INFO [d161e589] Running /usr/bin/env bundle install --path /app/pingitybot/shared/bundle --jobs 4 --without development test --deployment --quiet on pingitybot-vagrant
+ DEBUG [d161e589] Command: cd /app/pingitybot/releases/20190327192554 && /usr/bin/env bundle install --path /app/pingitybot/shared/bundle --jobs 4 --without development test --deployment --quiet
+ DEBUG [5130343d] 	Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
+
+current directory:
+/app/pingitybot/shared/bundle/ruby/2.5.0/gems/eventmachine-1.2.7/ext
+/usr/bin/ruby2.5 -r ./siteconf20190327-8357-17p6e00.rb extconf.rb
+checking for -lcrypto... no
+checking for openssl/ssl.h... no
+checking for -lcrypto... no
+checking for openssl/ssl.h... no
+checking for -lcrypto... no
+checking for openssl/ssl.h... no
+checking for -lcrypto... no
+checking for openssl/ssl.h... no
+checking for rb_trap_immediate in ruby.h,rubysig.h... no
+checking for rb_thread_blocking_region()... no
+checking for rb_thread_call_without_gvl() in ruby/thread.h... yes
+checking for rb_thread_fd_select()... yes
+checking for rb_fdset_t in ruby/intern.h... yes
+checking for rb_wait_for_single_fd()... yes
+checking for rb_enable_interrupt()... no
+checking for rb_time_new()... yes
+checking for inotify_init() in sys/inotify.h... yes
+checking for writev() in sys/uio.h... yes
+checking for pipe2() in unistd.h... yes
+checking for accept4() in sys/socket.h... yes
+checking for SOCK_CLOEXEC in sys/socket.h... yes
+checking for sys/event.h... no
+checking for epoll_create() in sys/epoll.h... yes
+checking for clock_gettime()... yes
+checking for CLOCK_MONOTONIC_RAW in time.h... yes
+checking for CLOCK_MONOTONIC in time.h... yes
+CXXFLAGS=-g -O2 -fdebug-prefix-map=/build/ruby2.5-VnpVLW/ruby2.5-2.5.1=.
+-fstack-protector-strong -Wformat -Werror=format-security
+creating Makefile
+
+current directory:
+/app/pingitybot/shared/bundle/ruby/2.5.0/gems/eventmachine-1.2.7/ext
+make "DESTDIR=" clean
+sh: 1: make: not found
+
+current directory:
+/app/pingitybot/shared/bundle/ruby/2.5.0/gems/eventmachine-1.2.7/ext
+make "DESTDIR="
+sh: 1: make: not found
+
+make failed, exit code 127
+
+Gem files will remain installed in
+/app/pingitybot/shared/bundle/ruby/2.5.0/gems/eventmachine-1.2.7 for inspection.
+Results logged to
+/app/pingitybot/shared/bundle/ruby/2.5.0/extensions/x86_64-linux/2.5.0/eventmachine-1.2.7/gem_make.out
+
+An error occurred while installing eventmachine (1.2.7), and Bundler cannot
+continue.
+Make sure that `gem install eventmachine -v '1.2.7' --source
+'https://rubygems.org/'` succeeds before bundling.
+
+In Gemfile:
+  thin was resolved to 1.7.2, which depends on
+    eventmachine
+
+
+Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
+
+current directory:
+/app/pingitybot/shared/bundle/ruby/2.5.0/gems/websocket-driver-0.7.0/ext/websocket-driver
+/usr/bin/ruby2.5 -r ./siteconf20190327-8357-aupybx.rb extconf.rb
+creating Makefile
+
+current directory:
+/app/pingitybot/shared/bundle/ruby/2.5.0/gems/websocket-driver-0.7.0/ext/websocket-driver
+make "DESTDIR=" clean
+sh: 1: make: not found
+
+current directory:
+/app/pingitybot/shared/bundle/ruby/2.5.0/gems/websocket-driver-0.7.0/ext/websocket-driver
+make "DESTDIR="
+sh: 1: make: not found
+
+make failed, exit code 127
+
+Gem files will remain installed in
+/app/pingitybot/shared/bundle/ruby/2.5.0/gems/websocket-driver-0.7.0 for
+inspection.
+Results logged to
+/app/pingitybot/shared/bundle/ruby/2.5.0/extensions/x86_64-linux/2.5.0/websocket-driver-0.7.0/gem_make.out
+
+An error occurred while installing websocket-driver (0.7.0), and Bundler cannot
+continue.
+Make sure that `gem install websocket-driver -v '0.7.0' --source
+'https://rubygems.org/'` succeeds before bundling.
+
+In Gemfile:
+  slack-ruby-client was resolved to 0.14.1, which depends on
+    websocket-driver
+  INFO ---------------------------------------------------------------------------
+  INFO START 2019-03-27 15:27:07 -0400 cap vagrant deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [8b691279] Running /usr/bin/env mkdir -p /tmp on pingitybot-vagrant
+ DEBUG [8b691279] Command: /usr/bin/env mkdir -p /tmp
+  INFO [35cb206d] Finished in 0.952 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-pingitybot-vagrant-danny.sh 0.0%
+  INFO Uploading /tmp/git-ssh-pingitybot-vagrant-danny.sh 100.0%
+  INFO [0fecd525] Running /usr/bin/env chmod 700 /tmp/git-ssh-pingitybot-vagrant-danny.sh on pingitybot-vagrant
+ DEBUG [0fecd525] Command: /usr/bin/env chmod 700 /tmp/git-ssh-pingitybot-vagrant-danny.sh
+  INFO [ccd62c5c] Finished in 0.066 seconds with exit status 0 (successful).
+  INFO [5dc315aa] Running /usr/bin/env git ls-remote git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git HEAD on pingitybot-vagrant
+ DEBUG [5dc315aa] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git ls-remote git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git HEAD )
+ DEBUG [acce4324] 	a16fa34ef128c09c2f98f55117f9f03bb7e87ec9	HEAD
+  INFO [acce4324] Finished in 1.402 seconds with exit status 0 (successful).
+  INFO [c45a2aa0] Running /usr/bin/env mkdir -p /app/pingitybot/shared /app/pingitybot/releases on pingitybot-vagrant
+ DEBUG [c45a2aa0] Command: /usr/bin/env mkdir -p /app/pingitybot/shared /app/pingitybot/releases
+  INFO [1984cc31] Finished in 0.061 seconds with exit status 0 (successful).
+ DEBUG [a64694a2] Running [ -f /app/pingitybot/current/REVISION ] on pingitybot-vagrant
+ DEBUG [a64694a2] Command: [ -f /app/pingitybot/current/REVISION ]
+ DEBUG [fbb7a0d3] Finished in 0.044 seconds with exit status 1 (failed).
+ DEBUG [805c3e27] Running [ -f /app/pingitybot/repo/HEAD ] on pingitybot-vagrant
+ DEBUG [805c3e27] Command: [ -f /app/pingitybot/repo/HEAD ]
+ DEBUG [be913fc8] Finished in 0.054 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /app/pingitybot/repo
+ DEBUG [ca3139db] Running if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [ca3139db] Command: if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi
+ DEBUG [4a587b81] Finished in 0.046 seconds with exit status 0 (successful).
+  INFO [b754bfc1] Running /usr/bin/env git remote set-url origin git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git on pingitybot-vagrant
+ DEBUG [b754bfc1] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git remote set-url origin git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git )
+  INFO [21756608] Finished in 0.054 seconds with exit status 0 (successful).
+  INFO [15e0e35c] Running /usr/bin/env git remote update --prune on pingitybot-vagrant
+ DEBUG [15e0e35c] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [e8628383] 	Fetching origin
+  INFO [e8628383] Finished in 0.874 seconds with exit status 0 (successful).
+ DEBUG [5d2d807a] Running if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [5d2d807a] Command: if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi
+ DEBUG [7b7ebe5b] Finished in 0.052 seconds with exit status 0 (successful).
+  INFO [6b26056c] Running /usr/bin/env mkdir -p /app/pingitybot/releases/20190327192710 on pingitybot-vagrant
+ DEBUG [6b26056c] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env mkdir -p /app/pingitybot/releases/20190327192710 )
+  INFO [9718b94b] Finished in 0.051 seconds with exit status 0 (successful).
+  INFO [f4d298c4] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /app/pingitybot/releases/20190327192710 on pingitybot-vagrant
+ DEBUG [f4d298c4] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /app/pingitybot/releases/20190327192710 )
+  INFO [503a1f56] Finished in 0.062 seconds with exit status 0 (successful).
+ DEBUG [eb5362f6] Running if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [eb5362f6] Command: if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi
+ DEBUG [8b49854e] Finished in 0.047 seconds with exit status 0 (successful).
+ DEBUG [88cb1d01] Running /usr/bin/env git rev-list --max-count=1 master on pingitybot-vagrant
+ DEBUG [88cb1d01] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [a92e0589] 	a16fa34ef128c09c2f98f55117f9f03bb7e87ec9
+ DEBUG [a92e0589] Finished in 0.063 seconds with exit status 0 (successful).
+ DEBUG [92044a7f] Running if test ! -d /app/pingitybot/releases/20190327192710; then echo "Directory does not exist '/app/pingitybot/releases/20190327192710'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [92044a7f] Command: if test ! -d /app/pingitybot/releases/20190327192710; then echo "Directory does not exist '/app/pingitybot/releases/20190327192710'" 1>&2; false; fi
+ DEBUG [5b97f38d] Finished in 0.047 seconds with exit status 0 (successful).
+  INFO [2a663d3b] Running /usr/bin/env echo "a16fa34ef128c09c2f98f55117f9f03bb7e87ec9" > REVISION on pingitybot-vagrant
+ DEBUG [2a663d3b] Command: cd /app/pingitybot/releases/20190327192710 && /usr/bin/env echo "a16fa34ef128c09c2f98f55117f9f03bb7e87ec9" > REVISION
+  INFO [c05de2b7] Finished in 0.070 seconds with exit status 0 (successful).
+ DEBUG [a18c9f59] Running if test ! -d /app/pingitybot/releases/20190327192710; then echo "Directory does not exist '/app/pingitybot/releases/20190327192710'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [a18c9f59] Command: if test ! -d /app/pingitybot/releases/20190327192710; then echo "Directory does not exist '/app/pingitybot/releases/20190327192710'" 1>&2; false; fi
+ DEBUG [d5e2d30d] Finished in 0.053 seconds with exit status 0 (successful).
+ DEBUG [2d2cd7ca] Running /usr/bin/env bundle check --path /app/pingitybot/shared/bundle on pingitybot-vagrant
+ DEBUG [2d2cd7ca] Command: cd /app/pingitybot/releases/20190327192710 && /usr/bin/env bundle check --path /app/pingitybot/shared/bundle
+ DEBUG [8a754eef] 	The following gems are missing
+ * eventmachine (1.2.7)
+ * websocket-driver (0.7.0)
+ DEBUG [8a754eef] 	 * slack-ruby-client (0.14.1)
+ * thin (1.7.2)
+ DEBUG [8a754eef] 	Install missing gems with `bundle install`
+ DEBUG [8a754eef] Finished in 0.289 seconds with exit status 1 (failed).
+  INFO [1b5d3511] Running /usr/bin/env bundle install --path /app/pingitybot/shared/bundle --jobs 4 --without development test --deployment --quiet on pingitybot-vagrant
+ DEBUG [1b5d3511] Command: cd /app/pingitybot/releases/20190327192710 && /usr/bin/env bundle install --path /app/pingitybot/shared/bundle --jobs 4 --without development test --deployment --quiet
+ DEBUG [431080fb] 	Gem::Ext::BuildError: ERROR: Failed to build gem native extension.
+
+current directory:
+/app/pingitybot/shared/bundle/ruby/2.5.0/gems/eventmachine-1.2.7/ext
+/usr/bin/ruby2.5 -r ./siteconf20190327-8877-d9esfe.rb extconf.rb
+checking for -lcrypto... no
+checking for openssl/ssl.h... no
+checking for -lcrypto... no
+checking for openssl/ssl.h... no
+checking for -lcrypto... no
+checking for openssl/ssl.h... no
+checking for -lcrypto... no
+checking for openssl/ssl.h... no
+checking for rb_trap_immediate in ruby.h,rubysig.h... no
+checking for rb_thread_blocking_region()... no
+checking for rb_thread_call_without_gvl() in ruby/thread.h... yes
+checking for rb_thread_fd_select()... yes
+checking for rb_fdset_t in ruby/intern.h... yes
+checking for rb_wait_for_single_fd()... yes
+checking for rb_enable_interrupt()... no
+checking for rb_time_new()... yes
+checking for inotify_init() in sys/inotify.h... yes
+checking for writev() in sys/uio.h... yes
+checking for pipe2() in unistd.h... yes
+checking for accept4() in sys/socket.h... yes
+checking for SOCK_CLOEXEC in sys/socket.h... yes
+checking for sys/event.h... no
+checking for epoll_create() in sys/epoll.h... yes
+checking for clock_gettime()... yes
+checking for CLOCK_MONOTONIC_RAW in time.h... yes
+checking for CLOCK_MONOTONIC in time.h... yes
+CXXFLAGS=-g -O2 -fdebug-prefix-map=/build/ruby2.5-VnpVLW/ruby2.5-2.5.1=.
+-fstack-protector-strong -Wformat -Werror=format-security
+creating Makefile
+
+current directory:
+/app/pingitybot/shared/bundle/ruby/2.5.0/gems/eventmachine-1.2.7/ext
+make "DESTDIR=" clean
+
+current directory:
+/app/pingitybot/shared/bundle/ruby/2.5.0/gems/eventmachine-1.2.7/ext
+make "DESTDIR="
+compiling binder.cpp
+make: g++: Command not found
+Makefile:234: recipe for target 'binder.o' failed
+make: *** [binder.o] Error 127
+
+make failed, exit code 2
+
+Gem files will remain installed in
+/app/pingitybot/shared/bundle/ruby/2.5.0/gems/eventmachine-1.2.7 for inspection.
+Results logged to
+/app/pingitybot/shared/bundle/ruby/2.5.0/extensions/x86_64-linux/2.5.0/eventmachine-1.2.7/gem_make.out
+
+An error occurred while installing eventmachine (1.2.7), and Bundler cannot
+continue.
+Make sure that `gem install eventmachine -v '1.2.7' --source
+'https://rubygems.org/'` succeeds before bundling.
+
+In Gemfile:
+  thin was resolved to 1.7.2, which depends on
+    eventmachine
+  INFO ---------------------------------------------------------------------------
+  INFO START 2019-03-27 15:27:44 -0400 cap vagrant deploy
+  INFO ---------------------------------------------------------------------------
+  INFO [07bc3cd3] Running /usr/bin/env mkdir -p /tmp on pingitybot-vagrant
+ DEBUG [07bc3cd3] Command: /usr/bin/env mkdir -p /tmp
+  INFO [8d111d45] Finished in 0.688 seconds with exit status 0 (successful).
+ DEBUG Uploading /tmp/git-ssh-pingitybot-vagrant-danny.sh 0.0%
+  INFO Uploading /tmp/git-ssh-pingitybot-vagrant-danny.sh 100.0%
+  INFO [fbab48d6] Running /usr/bin/env chmod 700 /tmp/git-ssh-pingitybot-vagrant-danny.sh on pingitybot-vagrant
+ DEBUG [fbab48d6] Command: /usr/bin/env chmod 700 /tmp/git-ssh-pingitybot-vagrant-danny.sh
+  INFO [20bf7059] Finished in 0.067 seconds with exit status 0 (successful).
+  INFO [c9b5a234] Running /usr/bin/env git ls-remote git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git HEAD on pingitybot-vagrant
+ DEBUG [c9b5a234] Command: ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git ls-remote git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git HEAD )
+ DEBUG [28a11425] 	a16fa34ef128c09c2f98f55117f9f03bb7e87ec9	HEAD
+  INFO [28a11425] Finished in 0.887 seconds with exit status 0 (successful).
+  INFO [23ee1b54] Running /usr/bin/env mkdir -p /app/pingitybot/shared /app/pingitybot/releases on pingitybot-vagrant
+ DEBUG [23ee1b54] Command: /usr/bin/env mkdir -p /app/pingitybot/shared /app/pingitybot/releases
+  INFO [c064016c] Finished in 0.057 seconds with exit status 0 (successful).
+ DEBUG [6dd230a5] Running [ -f /app/pingitybot/current/REVISION ] on pingitybot-vagrant
+ DEBUG [6dd230a5] Command: [ -f /app/pingitybot/current/REVISION ]
+ DEBUG [42e20856] Finished in 0.055 seconds with exit status 1 (failed).
+ DEBUG [cd3a1817] Running [ -f /app/pingitybot/repo/HEAD ] on pingitybot-vagrant
+ DEBUG [cd3a1817] Command: [ -f /app/pingitybot/repo/HEAD ]
+ DEBUG [3f05fb6a] Finished in 0.055 seconds with exit status 0 (successful).
+  INFO The repository mirror is at /app/pingitybot/repo
+ DEBUG [be0af7ea] Running if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [be0af7ea] Command: if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi
+ DEBUG [b2120a61] Finished in 0.060 seconds with exit status 0 (successful).
+  INFO [5aff321b] Running /usr/bin/env git remote set-url origin git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git on pingitybot-vagrant
+ DEBUG [5aff321b] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git remote set-url origin git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git )
+  INFO [b6461895] Finished in 0.067 seconds with exit status 0 (successful).
+  INFO [d6037434] Running /usr/bin/env git remote update --prune on pingitybot-vagrant
+ DEBUG [d6037434] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git remote update --prune )
+ DEBUG [d1ffe45c] 	Fetching origin
+  INFO [d1ffe45c] Finished in 0.904 seconds with exit status 0 (successful).
+ DEBUG [0c27ae14] Running if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [0c27ae14] Command: if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi
+ DEBUG [e8260492] Finished in 0.047 seconds with exit status 0 (successful).
+  INFO [53fe7945] Running /usr/bin/env mkdir -p /app/pingitybot/releases/20190327192746 on pingitybot-vagrant
+ DEBUG [53fe7945] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env mkdir -p /app/pingitybot/releases/20190327192746 )
+  INFO [ec81a3d8] Finished in 0.049 seconds with exit status 0 (successful).
+  INFO [fdd32fd2] Running /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /app/pingitybot/releases/20190327192746 on pingitybot-vagrant
+ DEBUG [fdd32fd2] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git archive master | /usr/bin/env tar -x -f - -C /app/pingitybot/releases/20190327192746 )
+  INFO [dc9930be] Finished in 0.079 seconds with exit status 0 (successful).
+ DEBUG [52a20377] Running if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [52a20377] Command: if test ! -d /app/pingitybot/repo; then echo "Directory does not exist '/app/pingitybot/repo'" 1>&2; false; fi
+ DEBUG [a5d552c8] Finished in 0.055 seconds with exit status 0 (successful).
+ DEBUG [b55843b6] Running /usr/bin/env git rev-list --max-count=1 master on pingitybot-vagrant
+ DEBUG [b55843b6] Command: cd /app/pingitybot/repo && ( export GIT_ASKPASS="/bin/echo" GIT_SSH="/tmp/git-ssh-pingitybot-vagrant-danny.sh" ; /usr/bin/env git rev-list --max-count=1 master )
+ DEBUG [a9895e46] 	a16fa34ef128c09c2f98f55117f9f03bb7e87ec9
+ DEBUG [a9895e46] Finished in 0.064 seconds with exit status 0 (successful).
+ DEBUG [3e39b64c] Running if test ! -d /app/pingitybot/releases/20190327192746; then echo "Directory does not exist '/app/pingitybot/releases/20190327192746'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [3e39b64c] Command: if test ! -d /app/pingitybot/releases/20190327192746; then echo "Directory does not exist '/app/pingitybot/releases/20190327192746'" 1>&2; false; fi
+ DEBUG [e92f987b] Finished in 0.056 seconds with exit status 0 (successful).
+  INFO [01300af9] Running /usr/bin/env echo "a16fa34ef128c09c2f98f55117f9f03bb7e87ec9" > REVISION on pingitybot-vagrant
+ DEBUG [01300af9] Command: cd /app/pingitybot/releases/20190327192746 && /usr/bin/env echo "a16fa34ef128c09c2f98f55117f9f03bb7e87ec9" > REVISION
+  INFO [4380eaf7] Finished in 0.062 seconds with exit status 0 (successful).
+ DEBUG [fef5867f] Running if test ! -d /app/pingitybot/releases/20190327192746; then echo "Directory does not exist '/app/pingitybot/releases/20190327192746'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [fef5867f] Command: if test ! -d /app/pingitybot/releases/20190327192746; then echo "Directory does not exist '/app/pingitybot/releases/20190327192746'" 1>&2; false; fi
+ DEBUG [bed1082a] Finished in 0.053 seconds with exit status 0 (successful).
+ DEBUG [64ad1a84] Running /usr/bin/env bundle check --path /app/pingitybot/shared/bundle on pingitybot-vagrant
+ DEBUG [64ad1a84] Command: cd /app/pingitybot/releases/20190327192746 && /usr/bin/env bundle check --path /app/pingitybot/shared/bundle
+ DEBUG [ae7e14b3] 	The following gems are missing
+ * eventmachine (1.2.7)
+ * thin (1.7.2)
+Install missing gems with `bundle install`
+ DEBUG [ae7e14b3] Finished in 0.295 seconds with exit status 1 (failed).
+  INFO [18882c3f] Running /usr/bin/env bundle install --path /app/pingitybot/shared/bundle --jobs 4 --without development test --deployment --quiet on pingitybot-vagrant
+ DEBUG [18882c3f] Command: cd /app/pingitybot/releases/20190327192746 && /usr/bin/env bundle install --path /app/pingitybot/shared/bundle --jobs 4 --without development test --deployment --quiet
+  INFO [213013a5] Finished in 12.369 seconds with exit status 0 (successful).
+  INFO [ad1bd1c1] Running /usr/bin/env ln -s /app/pingitybot/releases/20190327192746 /app/pingitybot/releases/current on pingitybot-vagrant
+ DEBUG [ad1bd1c1] Command: /usr/bin/env ln -s /app/pingitybot/releases/20190327192746 /app/pingitybot/releases/current
+  INFO [4ffc4252] Finished in 0.048 seconds with exit status 0 (successful).
+  INFO [a930039c] Running /usr/bin/env mv /app/pingitybot/releases/current /app/pingitybot on pingitybot-vagrant
+ DEBUG [a930039c] Command: /usr/bin/env mv /app/pingitybot/releases/current /app/pingitybot
+  INFO [52e8b9dd] Finished in 0.047 seconds with exit status 0 (successful).
+ DEBUG [182ba7f4] Running /usr/bin/env ls -x /app/pingitybot/releases on pingitybot-vagrant
+ DEBUG [182ba7f4] Command: /usr/bin/env ls -x /app/pingitybot/releases
+ DEBUG [5c39b184] 	20190327191052	20190327191351	20190327192131	20190327192412	20190327192554
+20190327192710	20190327192746
+ DEBUG [5c39b184] Finished in 0.052 seconds with exit status 0 (successful).
+  INFO Keeping 5 of 7 deployed releases on pingitybot-vagrant
+ DEBUG [9f580379] Running [ -d /app/pingitybot/current ] on pingitybot-vagrant
+ DEBUG [9f580379] Command: [ -d /app/pingitybot/current ]
+ DEBUG [be6cfeae] Finished in 0.046 seconds with exit status 0 (successful).
+ DEBUG [2aec3385] Running /usr/bin/env readlink /app/pingitybot/current on pingitybot-vagrant
+ DEBUG [2aec3385] Command: /usr/bin/env readlink /app/pingitybot/current
+ DEBUG [206028d3] 	/app/pingitybot/releases/20190327192746
+ DEBUG [206028d3] Finished in 0.048 seconds with exit status 0 (successful).
+  INFO [99869da9] Running /usr/bin/env rm -rf /app/pingitybot/releases/20190327191052 /app/pingitybot/releases/20190327191351 on pingitybot-vagrant
+ DEBUG [99869da9] Command: /usr/bin/env rm -rf /app/pingitybot/releases/20190327191052 /app/pingitybot/releases/20190327191351
+  INFO [eaea4bf4] Finished in 0.049 seconds with exit status 0 (successful).
+ DEBUG [31ae40ae] Running if test ! -d /app/pingitybot/releases; then echo "Directory does not exist '/app/pingitybot/releases'" 1>&2; false; fi on pingitybot-vagrant
+ DEBUG [31ae40ae] Command: if test ! -d /app/pingitybot/releases; then echo "Directory does not exist '/app/pingitybot/releases'" 1>&2; false; fi
+ DEBUG [72d87455] Finished in 0.055 seconds with exit status 0 (successful).
+  INFO [cd8e2170] Running /usr/bin/env echo "Branch master (at a16fa34ef128c09c2f98f55117f9f03bb7e87ec9) deployed as release 20190327192746 by danny" >> /app/pingitybot/revisions.log on pingitybot-vagrant
+ DEBUG [cd8e2170] Command: cd /app/pingitybot/releases && /usr/bin/env echo "Branch master (at a16fa34ef128c09c2f98f55117f9f03bb7e87ec9) deployed as release 20190327192746 by danny" >> /app/pingitybot/revisions.log
+  INFO [d5eee33b] Finished in 0.060 seconds with exit status 0 (successful).
