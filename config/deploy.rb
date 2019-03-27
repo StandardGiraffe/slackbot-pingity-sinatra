@@ -12,7 +12,8 @@ set :format_options,
 
 set :deploy_to, "/app/pingitybot"
 
-# append :linked_files,
+append :linked_files,
+  '.env'
 #   'config/database.yml',
 #   'config/rmq.yml',
 #   'config/api_config.yml',
