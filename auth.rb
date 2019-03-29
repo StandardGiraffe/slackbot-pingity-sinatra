@@ -55,14 +55,14 @@ class Auth < Sinatra::Base
 
   # OAuth Step 1: Show the "Add to Slack" button, which links to Slack's auth request page.
   # This page shows the user what our app would like to access and what bot user we'd like to create for their team.
-  get '/begin_auth' do
+  get '/bot/begin_auth' do
     status 200
     body add_to_slack_button
   end
 
   # OAuth Step 2: The user has told Slack that they want to authorize our app to use their account, so
   # Slack sends us a code which we can use to request a token for the user's account.
-  get '/finish_auth' do
+  get '/bot/finish_auth' do
     client = Slack::Web::Client.new
     # OAuth Step 3: Success or failure
     begin
