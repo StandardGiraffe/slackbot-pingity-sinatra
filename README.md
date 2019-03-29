@@ -6,50 +6,73 @@ PingityBot integrates [Pingity](https://pingity.com) web resource analysis servi
 `/ping` and `/monitor` details go here
 
 ## Installation
+This repository will allow you to provision and deploy an instance of the PingityBot Slack App server.  In order to get up and running, you'll need a Pingity developer API key to authorize the Pingity Gem.
 
-### Building Vagrant Machine
-Clone PingityBot and provision a Vagrant machine using the included `Vagrantfile`:
+First, clone the repository locally:
+
 ```bash
-<home:> ...$ git clone git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git
-<home:> ...$ cd slackbot-pingity-sinatra
-<home:> .../slackbot-pingity-sinatra$ vagrant up
-<home:> .../slackbot-pingity-sinatra$ vagrant ssh
-```
-Once inside, create a landing directory for the deployed PingityBot:
-```bash
-<vagrant:> /app# mkdir -p pingitybot/releases pingitybot/shared
-<vagrant:> /app# chown -R vagrant:vagrant pingitybot
+# ~/
+$ git clone git@github.com:StandardGiraffe/slackbot-pingity-sinatra.git pingitybot
+$ cd pingitybot
 ```
 
-Install Ruby, Rack, Bundler, and compilers:
+### Populate the `.env` file
+
+This is the most convenient time to populate the `.env` file that both PingityBot and the Pingity Gem rely upon to make API calls.  You can use the `.env.sample` as a template:
+
 ```bash
-<vagrant:> ~# apt install ruby
-<vagrant:> ~# apt install ruby-dev
-<vagrant:> ~# gem install rack
-<vagrant:> ~# gem install bundler
-<vagrant:> ~# apt install gcc
-<vagrant:> ~# apt install make
-<vagrant:> ~# apt install g++
+# ~/pingitybot
+
+$ cp .env.sample .env
 ```
 
-Outside of Vagrant, deploy with Capistrano:
+**Note:** In order to get the required information, you'll currently need to install the app to your team.  Some of these values will become permanent/abstracted away when the app is authorized on the Slack marketplace.
+
+#### Pingity Gem Credentials
+Information to complete the Pingity Gem portion of the `.env` file can be found on your Pingity account's Developer's section, under APIs.  View one of your existing API keys, or create a new one that will be used exclusively by PingityBot.  (This will be the API key against which **all PingityBot tests for all users** will be run, so it should have an unlimited capacity.)
+
+In your `.env` file:
+* `PINGITY_ID=` <ID>
+* `PINGITY_SECRET=` <Secret>
+* `PINGITY_API_BASE=https://pingity.com`
+
+(`PINGITY_API_BASE` will default to `https://pingity.com`, but can be replaced with another endpoint if you wish (for example, if you're running an instance of Pingity locally).)
+
+#### PingityBot Credentials
+Information to complete the PingityBot portion of the `.env` file can be found at the app's Slack page.
+
+* Go to the **Basic Information** page and scroll down until you reach the **App Credentials** section.  You can populate the `.env` file as follows:
+  * Client ID -> `SLACK_CLIENT_ID`
+  * Client Secret -> `SLACK_API_SECRET`
+  * Signing Secret -> `SLACK_SIGNING_SECRET`
+  * Verification Token -> `SLACK_VERIFICATION_TOKEN`
+  (Note, the more secure Signing Secret will be used automatically if available.)
+* Next, in **Incoming Webhooks**, create a new Webhook URL for any channels you're planning to invite PingityBot into.  (This feature is currently unused; you can leave `SLACK_WEBHOOK_URL` blank at the moment.)
+  * Webhook URL -> SLACK_WEBHOOK_URL
+* Finally, in **OAuth & Permissions**:
+  * Bot User OAuth Access Token -> SLACK_API_TOKEN
+
+At this point, you should have a completely populated `.env` file.
+
+### Build the Vagrant Machine and Deploy
+
+To build the machine on which the server will run, ensure you have [Vagrant](https://www.vagrantup.com/) and a compatible virtual machine manager installed, and then run:
+
 ```bash
-<home:> .../slackbot-pingity-sinatra$ cap vagrant deploy
+# ~/pingitybot
+
+$ vagrant up
 ```
-(Or, to deploy from a specific branch:)
+
+This will download a Vagrant Box of [Ubuntu Server 18.04](https://app.vagrantup.com/ubuntu/boxes/bionic64) and provision it with the necessary files, applications, and gems.  If you completed your `.env` file in the previous step, it will be copied over (otherwise, a copy of the template will be sent instead; to make further changes, the file can be found at `/app/pingitybot/shared/.env` on the virtual machine).
+
+Finally, ensure you have Capistrano installed and deploy PingityBot to the virtual machine:
 ```bash
-<home:> .../slackbot-pingity-sinatra$ BRANCH=<branch name> cap vagrant deploy
+# ~/pingitybot
+
+$ cap vagrant deploy --trace
+
+# If you wish to deploy from a different branch, instead run:
+$ BRANCH=<branch name> cap vagrant deploy --trace
 ```
-
-Copy the systemd PingityBot service unit into system unit directory, enable, and start it:
-```bash
-<vagrant:> /app/pingitybot/current# cp pingitybot.service /lib/systemd/system
-<vagrant:> /app/pingitybot/current# systemctl enable pingitybot.service
-<vagrant:> /app/pingitybot/current# systemctl start pingitybot.service
-```
-
-... Connecting via the Slack Marketplace
-
-... Populating the `.env` file
-
 
