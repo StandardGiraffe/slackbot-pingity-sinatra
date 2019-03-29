@@ -49,8 +49,12 @@ class Auth < Sinatra::Base
   )
 
   # If a user tries to access the index page, redirect them to the auth start page
+  get '/' do
+    redirect '/bot/begin_auth'
+  end
+
   get '/bot' do
-    redirect '/begin_auth'
+    redirect '/bot/begin_auth'
   end
 
   # OAuth Step 1: Show the "Add to Slack" button, which links to Slack's auth request page.
