@@ -12,22 +12,18 @@ set :format_options,
 
 set :deploy_to, "/app/pingitybot"
 
-after "deploy:check:make_linked_dirs", "pingity_bot:upload_env"
+after "deploy:symlink:release", "pingitybot:start_pingitybot_service"
 
-namespace :pingity_bot do
-  task :upload_env do
-    on roles(:pingitybot_vagrant) do
-      execute! "sudo systemctl enable pingitybot.service && sudo systemctl start pingitybot.service"
+namespace :pingitybot do
+  task :start_pingitybot_service do
+    on roles(:app) do
+      execute "sudo systemctl enable pingitybot.service && sudo systemctl start pingitybot.service"
     end
   end
 end
 
 append :linked_files,
   '.env'
-#   'config/database.yml',
-#   'config/rmq.yml',
-#   'config/api_config.yml',
-#   'config/event_queue.yml'
 
 set :keep_releases, 5
 

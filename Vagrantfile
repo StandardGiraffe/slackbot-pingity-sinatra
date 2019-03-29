@@ -83,12 +83,19 @@ Vagrant.configure("2") do |config|
     SHELL
 
     config.vm.provision "file", source: "systemd/pingitybot.service", destination: "pingitybot.service"
-    config.vm.provision "file", source: ".env", destination: ".env"
+
+    if File.exist?(".env")
+      config.vm.provision "file", source: ".env", destination: ".env"
+    else
+      config.vm.provision "file", source: ".env.sample", destination: ".env"
+    end
 
     config.vm.provision "shell", inline:
     <<-SHELL
-      mv pingitybot.service /lib/systemd/system/pingitybot.service
+      perl -pi -e 's/localhost/_gateway/g' .env
       mv .env /app/pingitybot/shared/.env
+      mv pingitybot.service /lib/systemd/system/pingitybot.service
+      touch /app/pingitybot/shared/.env
     SHELL
       # sudo systemctl enable pingitybot.service
       # sudo systemctl start pingitybot.service
