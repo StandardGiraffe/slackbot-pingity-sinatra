@@ -32,8 +32,8 @@ $ cp .env.sample .env
 Information to complete the Pingity Gem portion of the `.env` file can be found on your Pingity account's Developer's section, under APIs.  View one of your existing API keys, or create a new one that will be used exclusively by PingityBot.  (This will be the API key against which **all PingityBot tests for all users** will be run, so it should have an unlimited capacity.)
 
 In your `.env` file:
-* `PINGITY_ID=` <ID>
-* `PINGITY_SECRET=` <Secret>
+* `PINGITY_ID=` &lt;ID&gt;
+* `PINGITY_SECRET=` &lt;Secret&gt;
 * `PINGITY_API_BASE=https://pingity.com`
 
 (`PINGITY_API_BASE` will default to `https://pingity.com`, but can be replaced with another endpoint if you wish (for example, if you're running an instance of Pingity locally).)
