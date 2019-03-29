@@ -1,0 +1,19 @@
+# Copy this file into /lib/systemd/system
+
+[Unit]
+Description=PingityBot
+Requires=network.target
+
+[Service]
+Environment=APP_ENV=production
+LimitNOFILE=1048576
+NonBlocking=true
+WorkingDirectory=/app/pingitybot/current
+ExecStart=/usr/local/rvm/gems/ruby-2.5.3/wrappers/rackup
+ExecReload=/bin/kill -HUP $MAINPID
+User=vagrant
+Restart=always
+SuccessExitStatus=0
+
+[Install]
+WantedBy=multi-user.target

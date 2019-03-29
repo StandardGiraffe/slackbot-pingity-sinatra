@@ -42,11 +42,11 @@ class API < Sinatra::Base
     set :server, :thin
   end
 
-  get '/debug' do
+  get '/bot/debug' do
     [200, { }, JSON.dump(number_of_threads: Thread.list.size, teams: $teams)]
   end
 
-  post '/command' do
+  post '/bot/command' do
     in_background do
       # Token verification is depricated.  Use #verify_signature instead if possible.
       # verify_token(params['token'])
@@ -84,7 +84,7 @@ class API < Sinatra::Base
     200
   end
 
-  post '/actions' do
+  post '/bot/actions' do
     payload = JSON.parse(params['payload'])
 
     in_background do

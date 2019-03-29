@@ -49,7 +49,7 @@ class Auth < Sinatra::Base
   )
 
   # If a user tries to access the index page, redirect them to the auth start page
-  get '/' do
+  get '/bot' do
     redirect '/begin_auth'
   end
 
